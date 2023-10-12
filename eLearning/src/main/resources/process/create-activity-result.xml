@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://www.isis.cm/config/process"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/process /schema/processdefinition.xsd"
+         start="checkActivityType"
+         name="Create activity result">
+    <description>Busines process describe the step of activity start</description>
+    <actions>
+        <action id="checkActivityType" bean="checkActivityType">
+            <transitions>
+                <transition name="TEST" to="processTestActivity"/>
+                <transition name="HOMEWORK" to="processHomeworkActivity"/>
+                <transition name="LECON" to="processLeconActivity" />
+            </transitions>
+        </action>
+        <action id="processTestActivity" bean="processTestActivity">
+            <transitions>
+                <transition name="OK" to="lastAction"/>
+                <transition name="ERROR" to="errorAction" />
+            </transitions>
+        </action>
+        <action id="processHomeworkActivity" bean="processHomeworkActivity">
+            <transitions>
+                <transition name="OK" to="lastAction"/>
+                <transition name="ERROR" to="errorAction" />
+            </transitions>
+        </action>
+        <action id="processLeconActivity" bean="processLeconActivity">
+            <transitions>
+                <transition name="OK" to="lastAction"/>
+                <transition name="ERROR" to="errorAction" />
+            </transitions>
+        </action>
+        <end id="lastAction" state="SUCCEEDED" />
+        <end id="errorAction" state="ERROR" />
+    </actions>
+</process>

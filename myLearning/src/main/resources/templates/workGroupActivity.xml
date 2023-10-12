@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         action="workGroupAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="virtual" />
+            <l:column qualifier="classroom" />
+            <l:column qualifier="size" />
+            <l:column qualifier="available" />
+            <l:column qualifier="reserve" />
+            <l:column qualifier="onlineRegister" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code" searchTitle="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section columns="2" name="hac.commons" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="classroom" widget="manytoone" observable="true"/>
+                        <e:field qualifier="groupes" widget="manytomany" />
+                    </e:section>
+                    <e:section name="hac.commons.023" columns="2" position="99">
+                        <e:section name="hac.commons.024" columns="2" position="100">
+                            <e:field qualifier="beginAt" widget="datetime-local" />
+                            <e:field qualifier="endAt" widget="datetime-local" />
+                        </e:section>
+                        <e:section name="hac.commons.025" columns="2" position="99">
+                            <e:field qualifier="virtual" widget="switch" />
+                            <e:field qualifier="onlineRegister" widget="switch" />
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.commons.availability" position="98" columns="3" header="true">
+                        <e:field qualifier="size" editable="false" updatable="false" observe="classroom" handler="classroom.size"/>
+                        <e:field qualifier="available" editable="false" updatable="false"/>
+                        <e:field qualifier="reserve" editable="false" updatable="false"/>
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="1" position="97">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                    <e:section name="hac.commons.timesheets" columns="1" position="96" header="true">
+                        <e:field qualifier="timesheets" widget="onetomany" />
+                    </e:section>
+                    <e:section name="hac.commons.members" columns="1" position="95" header="true">
+                        <e:field qualifier="members" widget="onetomany" editable="false" updatable="true" deletable="false"/>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+        <a:actions>
+            <a:action name="workGroupActivity.ficheFormation" code="ficheFormation" position="actions" typeOp="print" />
+            <a:action name="WorkGroupActivity.close.action" code="workGroupActivity.validate" position="workflow" dynamic="true" />
+        </a:actions>
+    </e:editor-area>
+</context>

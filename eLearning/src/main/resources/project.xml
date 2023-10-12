@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.isis.cm/config/project"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/project  schema/project.xsd">
+    <name>e-learning</name>
+    <version>1.0.0</version>
+    <author>BEKONDO Kangue Dieuendort</author>
+    <sequence>10</sequence>
+    <summary>
+        <entry local="fr">
+            <value>Client web de la plateforme de formation</value>
+        </entry>
+        <entry local="en">
+            <value>Web site for trainig</value>
+        </entry>
+    </summary>
+    <description>
+        <entry local="fr">
+            <value>Client web de la plateforme de formation</value>
+        </entry>
+        <entry local="en">
+            <value>Web site for trainig</value>
+        </entry>
+    </description>
+    <category>school</category>
+    <website>https://www.isis.com</website>
+    <type>web</type>
+    <depends></depends>
+</project>

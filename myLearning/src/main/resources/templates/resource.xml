@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item" 
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="name" search="true"/>
+            <l:column qualifier="folder" search="true" />
+            <l:column qualifier="description" search="true" widget="localized"/>
+            <l:column qualifier="file" search="true"/>
+            <l:column qualifier="downloadUrl" search="true"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:field qualifier="name" />
+                        <e:field qualifier="folder" widget="manytoone" />
+                        <e:field qualifier="file" widget="file" />
+                        <e:field qualifier="downloadUrl" editable="false" updatable="false"/>
+                    </e:section>
+                    <e:section name="hac.commons" columns="1" position="99">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

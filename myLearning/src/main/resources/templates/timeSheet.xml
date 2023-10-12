@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="day" widget="date" search="true" />
+            <l:column qualifier="startAt"  search="true"/>
+            <l:column qualifier="endAt" search="true"/>
+            <l:column qualifier="subject" widget="localized"  search="true"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area>
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" position="100" columns="3">
+                        <e:field qualifier="day" widget="date" />
+                        <e:field qualifier="startAt" widget="time" />
+                        <e:field qualifier="endAt" widget="time" />
+                    </e:section>
+                    <e:section name="hac.commons" position="99" columns="1">
+                        <e:field qualifier="subject"  widget="localized-area"/>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

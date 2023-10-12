@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.isis.cm/config/project"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/project  schema/project.xsd">
+    <name>myLearning</name>
+    <version>1.0.0</version>
+    <author>Author name</author>
+    <sequence>10</sequence>
+    <summary>
+        <entry local="fr">
+            <value>Gestion des formations en lignes</value>
+        </entry>
+        <entry local="en">
+            <value>e-learning training module</value>
+        </entry>
+    </summary>
+    <description>
+        <entry local="fr">
+            <value>Permettre la gestion online des formation planification, programmation suivi et formation cyclique</value>
+        </entry>
+        <entry local="en">
+            <value>Full description of the plugin</value>
+        </entry>
+    </description>
+    <category>domain</category>
+    <website>https://www.isis.com</website>
+    <type>application</type>
+    <depends></depends>
+</project>

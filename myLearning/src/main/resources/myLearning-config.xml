@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module xmlns="http://www.isis.cm/config/module"
+        xmlns:e="http://www.isis.cm/config/explorer-tree">
+    <e:explorer-tree>
+        <e:navigation-node id="myLearning.planification" position="97" icon="fa-regular fa-calendar">
+             <e:navigation-node id="myLearning.training" code="Training" position="99" viewMode="list,view" icon="fa-solid fa-pen-to-square" />
+            <e:navigation-node id="myLearning.activities" position="100" icon="fa-solid fa-layer-group">
+                <!--<e:navigation-node id="myLearning.allactivities" position="96" icon="fa-solid fa-layer-group" code="Abstractactivity" viewMode="list,view" /> -->
+                <e:navigation-node id="myLearning.testsactivities" viewMode="list,view" code="TestActivity" icon="fa-solid fa-list-check" position="97" />
+                <e:navigation-node id="myLearning.homeworkactivities" icon="fa-solid fa-house-user" position="99" code="HomeworkActivity" viewMode="list,view" />
+                <e:navigation-node id="myLearning.leconsactivities" icon="fa-solid fa-book" position="100" code="LeconActivity" viewMode="list,view" />
+            </e:navigation-node>
+             <e:navigation-node id="myLearning.questions" position="100" icon="fa-solid fa-file-circle-question">
+                 <!--<e:navigation-node id="myLearning.allquestions" position="97" icon="fa-solid fa-clock" viewMode="list,view" code="AbstractQuestion" />-->
+                 <e:navigation-node id="myLearning.truefalequestions" icon="fa-brands fa-medium" position="98" code="TrueFalseQuestion" viewMode="list,view" />
+                 <e:navigation-node id="myLearning.multianswersquestions" icon="fa-solid fa-layer-group" position="99" code="MultiAnswerQuestion" viewMode="list,view" />
+                 <!--<e:navigation-node id="myLearning.openQuestions" icon="fa-solid fa-clock" position="100" code="OpenQuestion" viewMode="list,view" />-->
+             </e:navigation-node>
+            <e:navigation-node id="myLearining.resources" position="100" icon="fa-solid fa-inbox">
+                <e:navigation-node id="myLearning.files" position="99" icon="fa-solid fa-file" code="Resource" viewMode="list,view" />
+                <e:navigation-node id="myLearning.folders" position="100" icon="fa-solid fa-folder" code="Dossier" viewMode="list,view" />
+            </e:navigation-node>
+        </e:navigation-node>
+        <e:navigation-node id="myLearning.training.manager" position="98" icon="fa-regular fa-clipboard">
+            <e:navigation-node id="myLearning.involve.manager" position="90" icon="fa-solid fa-people-group" viewMode="list,view" code="Involve"   />
+        </e:navigation-node>
+        <e:navigation-node id="myLearning.requests.processor" position="99" icon="fa-solid fa-arrow-up-from-bracket">
+            <e:navigation-node id="myLearning.requests.processor.requests" position="90" icon="fa-solid fa-envelope" viewMode="list,view" code="RequestSend"  counter="requests.toprocess"/>
+        </e:navigation-node>
+        <e:navigation-node id="myLearning.administration" position="100" icon="fa-solid fa-sliders">
+            <e:navigation-node id="myLearning.participants" position="97" icon="fa-solid fa-people-group" viewMode="list,view" code="Participant" />
+            <e:navigation-node id="myLearning.groupes" position="96" icon="fa-solid fa-layer-group" viewMode="list,view" code="ParticipantGroup" />
+            <e:navigation-node id="myLearning.feedbacks" code="Feedback" icon="fa-solid fa-comments" position="98" viewMode="list,view" />
+            <e:navigation-node id="myLearning.theme" code="Theme" icon="fa-solid fa-briefcase" viewMode="list,view" position="99" />
+            <e:navigation-node id="myLearning.classroom" code="Classroom" position="100" icon="fa-solid fa-landmark" viewMode="list,view" />
+        </e:navigation-node>
+    </e:explorer-tree>
+</module>

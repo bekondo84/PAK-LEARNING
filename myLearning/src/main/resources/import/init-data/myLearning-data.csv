@@ -1,0 +1,79 @@
+$catalog=catalog(code)
+$version=version(code)
+$catalogVersion = catalogVersion($catalog, $version)[unique=true]
+##ParticipantModel
+INSERT_UPDATE Participant;code[unique=true];name;surname;password[translator=cm.platform.basecommerce.translators.impl.PasswordTranslator];category(code);email
+                         ;admin;Administraor;Administrator;nimda;EMPLOYE;admin@isis.cm
+                         ;dieunedort.bekondo;BEKONDO;Dieunedort;nimda;EMPLOYE;dieunedort.bekondo@pak.cm
+
+##LoginComponent
+INSERT_UPDATE Catalog;code[unique=true];name[lang=en];name[lang=fr];
+                     ;ELearning;Catalog for e-learning component;Catalog pour composant e-learning
+##Version catalog
+INSERT_UPDATE Version;code[unique=true];name[lang=fr];name[lang=en]
+                     ;Staged;Version non publier du catalog;Staged version of catalog
+                     ;Online;Version en ligne du catalog;Online version of catalog
+##CatalogVersion
+INSERT_UPDATE CatalogVersion;code[unique=true];catalog(code);version(code)
+                            ;ELearning:Staged;ELearning;Staged
+                            ;ELearning:Online;ELearning;Online
+
+##Create IMAGE
+##INSERT_UPDATE Media;image;code;format;confidential[default=false];width[default=10];catalogVersion(code)
+##                   ;formation.jpg;formation.jpg;jpg;;;'ELearning:Staged'
+##LoginComponent
+INSERT_UPDATE LoginComponent;code[unique=true];catalogVersion(code);visible[default=true];message[lang=fr];message[lang=en]
+                            ;login-name;ELearning:Staged;true;Bienvenue sur notre plateforme de e-learning;Welcome to our e-learning platform
+##TemplatePage section
+INSERT_UPDATE PageTemplate;code[unique=true];name[lang=fr];name[lang=en];path;cmsType(code);module(name)
+                          ;Training;Template formulaire Formation;Template for Training;training.xml;PAGE;myLearning
+                          ;Classroom;Modèle de salle de classe;Class room page template;classroom.xml;PAGE;myLearning
+                          ;Theme;Modèle de thème;Theme template page;theme.xml;PAGE;myLearning
+                          ;Participant;Participant formulaire;Participant template;participant.xml;PAGE;myLearning
+                          ;Feedback;Formulaire des feedback;Feedback template;feedback.xml;PAGE;myLearning
+                          ;TrueFalseQuestion;Vrai ou faux questionnaire;True or False question temaplate;trueFalseQuestion.xml;PAGE;myLearning
+                          ;MultiAnswerQuestion;Question a reponse multiple formulaire;Multi answer question form;multiAnswerQuestion.xml;PAGE;myLearning
+                          ;QuestionAnswer;Formulaire response aux questions à reponses multiples;MultiAnswer answer form;questionAnswer.xml;PAGE;myLearning
+                          ;AbstractQuestion;Banques de questions formulaire;Questions bank form;abstractQuestion.xml;PAGE;myLearning
+                          ;AbstractActivity;Formulaire des activites de formations;Generic Training activitity form;abstractActivity.xml;PAGE;myLearning
+                          ;TestActivity;Formulaire des activités de type evaluation des connaissances;Knowledge evalutation;testActivity.xml;PAGE;myLearning
+                          ;HomeworkActivity;Formulaire des devoirs;Homework form template;homeworkActivity.xml;PAGE;myLearning
+                          ;Involve;Formulaire des participant a une formation;Involve form template;involve.xml;PAGE;myLearning
+                          ;WorkGroupActivity;Formulaire des activités de type groupe de travail;Work group activities form;workGroupActivity.xml;PAGE;myLearning
+                          ;TimeSheet;Formulaire entrée emploi du temps;timesheet entry form template;timeSheet.xml;PAGE;myLearning
+                          ;LeconActivity;Formulaire des activités de type Cours;Lecon activities form;leconActivity.xml;PAGE;myLearning
+                          ;LeconContent;Formulaire des contenues des lecons;Lecon form content;leconContent.xml;PAGE;myLearning
+                          ;LeconQuestion;Formulaire des questionnaires pour les lecons;Questionnary form;leconQuestion.xml;PAGE;myLearning
+                          ;Resource;Formulaire des resources de formation;Training resource form;resource.xml;PAGE;myLearning
+                          ;Dossier;Formulaire des dossiers;Folder form;dossier.xml;PAGE;myLearning
+                          ;TestResult;Formulaire de création de resultat des tests;Test result form;testResult.xml;PAGE;myLearning
+                          ;AbstractAnswer;Formulaire de reponse questionnaire;Question answer form;abstractAnswer.xml;PAGE;myLearning
+                          ;HomeWorkResult;Formulaire des devoir des apprenants;Homework form;homeWorkResult.xml;PAGE;myLearning
+                          ;ParticipantGroup;Formulaire de creation des groupes apprenant;participant group form;participantGroup.xml;PAGE;myLearning
+                          ;OpenQuestion;Formulaire de question ouverte;Open question form;openQuestion.xml;PAGE;myLearning
+                          ;OpenQuestionAnswer;Formulaire reponse question ouvert;Open question answer form;openQuestionAnswer.xml;PAGE;myLearning
+                          ;LeconResult;Formulaire des reponses lecons;Lecon answer form;leconResult.xml;PAGE;myLearning
+                          ;LeconEvaluation;Formulaire des évaluations des cours;Lecon evaluation form;leconEvaluation.xml;PAGE;myLearning
+                          ;RequestSend;Formulaire de creation des request des users;Users request form creation;requestSend.xml;PAGE;myLearning
+
+##Custom user actions
+INSERT_UPDATE ActionNode;code[unique=true];label[lang=fr];label[lang=en];module(name);action;method
+                        ;classroom.size;Capacité maximal d'une salle de formation;Classroom max capacity;myLearning;classroomAction;nbreOfPlaces
+                        ;PublishTrainingAction;Publication d'un formation;Publish training;myLearning;trainingAction;PublishTraining
+                        ;CloseTrainingAction;Clôture la formation courante;Close the current training;myLearning;trainingAction;CloseTraining
+                        ;UploadParticipant;importation des participant depuis un fichier csv;Upload involve from CSV;myLearning;participantAction;upload
+                        ;involveUpload;Importation depuis un fichier csv des participants;Upload involve from csv;myLearning;involveAction;upload
+                        ;uploadTrueOrFalseQuestion;Importation des questions de types vrai ou faux;Upload trueor false question;myLearning;trueOrFalseAnswerAction;upload
+                        ;uploadMultiQuestion;Importation des questions à reponses multiples;Upload trueor false question;myLearning;multiAnswerQuestionAction;upload
+                        ;workGroupActivity.validate;Action de clôture d'un groupe de travail;close workgroup;myLearning;workGroupAction;validateWorkgroup
+                        ;training.participants;Affiche la liste des partiipants;Involve list;myLearning;involveAction;participantCount
+                        ;training.planning;Planification action;action planification;myLearning;workGroupAction;workgroupCount
+                        ;training.homeworks;Homework actions action;action planification;myLearning;homeworkActivityAction;homeActivitiesCount
+                        ;training.testActivities;Planification action;action planification;myLearning;testActivityAction;testActivitiesCount
+                        ;training.lecons;Planification action;action planification;myLearning;leconActivityAction;leconsCount
+                        ;request.send.close;Marquer une requette comme traitée;Mark a request as processed;myLearning;requestSendAction;markAsProcess
+                        ;requests.toprocess;retourne le nombre de requêtes non traités;return the number of request to process;myLearning;requestSendAction;requestToprocessCount
+                        ;leconActivity.content;Nombre de cours associé à la lecon;Number of course attached to lecon;myLearning;leconContentAction;courseCount
+                        ;leconActivity.questions;Nombre d'évaluations associé à la lecon;Number of course attached to lecon;myLearning;leconQuestionAction;testCount
+                        ;leconActivity.summary;Nombre de sommaire associé à la lecon;Number of summary attached to lecon;myLearning;summaryEntryAction;summaryCount
+                        ;leconActivity.results;Nombre de resultat disponible;Number of course attached to lecon;myLearning;leconResultAction;resultCount

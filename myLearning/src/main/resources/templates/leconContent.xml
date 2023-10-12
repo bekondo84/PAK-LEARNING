@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         action="leconContentAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="id" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true" />
+            <l:column qualifier="showOnMenu" search="true"/>
+            <l:column qualifier="sequence" search="true"/>
+            <l:column qualifier="content" widget="localized" />
+            <l:column qualifier="format" search="true"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="id" searchTitle="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" position="100" columns="2">
+                        <e:field qualifier="id" />
+                        <e:field qualifier="name"  widget="localized"/>
+                        <e:field qualifier="showOnMenu" widget="switch" />
+                        <e:field qualifier="sequence" />
+                        <e:field qualifier="resource" widget="manytoone" />
+                        <e:field qualifier="format" widget="manytoone" />
+                    </e:section>
+                    <e:section name="hac.commons02" position="99" columns="1">
+                        <e:field qualifier="content" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

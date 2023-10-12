@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://www.isis.cm/config/process"
+        start="createRequestSend"
+         name="Start Request Processing"
+>
+    <description>Business Process for user request management</description>
+    <actions>
+        <action id="createRequestSend" bean="createRequestSend">
+            <transitions>
+                <transition name="OK" to="notifyRequestProcessor"/>
+                <transition name="KO" to="FAILED" />
+            </transitions>
+        </action>
+        <action id="notifyRequestProcessor" bean="notifyRequestProcessor">
+            <transitions>
+                <transition name="OK" to="SUCCES"/>
+                <transition name="KO" to="FAILED" />
+            </transitions>
+        </action>
+        <end id="FAILED" state="FAILURE" />
+        <end id="SUCCES"  state="SUCCEEDED" />
+    </actions>
+</process>

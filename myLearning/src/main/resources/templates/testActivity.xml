@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         action="testActivityAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="theme" search="true" />
+            <l:column qualifier="training" search="true" />
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="successAt" search="true" />
+            <l:column qualifier="nbreOfattemps" search="true" />
+            <l:column qualifier="evalMethod" search="true" />
+            <l:column qualifier="markOn" />
+            <l:column qualifier="percent" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section columns="2" name="hac.commons" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="theme" widget="manytoone" />
+                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="successAt"  />
+                        <e:field qualifier="beginAt" widget="datetime-local" />
+                        <e:field qualifier="endAt" widget="datetime-local" />
+                        <e:field qualifier="sequence" />
+                        <e:field qualifier="nbreOfattemps"  />
+                        <e:field qualifier="evalMethod" widget="manytoone" />
+                        <e:field qualifier="markOn" />
+                        <e:field qualifier="percent" />
+                    </e:section>
+                    <e:section name="hac.commons" position="99" columns="1">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+            <e:tab name="hac.trueorfalse.questions">
+                <e:form>
+                    <e:section name="hac.truefalse.list" columns="1" position="98" >
+                        <e:field qualifier="truefalse" widget="manytomanylist">
+                            <e:filters>
+                                <e:filter name="theme-filter" source="theme" target="theme" />
+                            </e:filters>
+                        </e:field>
+                    </e:section>
+                </e:form>
+            </e:tab>
+            <e:tab name="hac.multianswers.questions">
+                <e:form>
+                    <e:section name="hac.multianswers.list" columns="1" position="98" >
+                        <e:field qualifier="multianswers" widget="manytomanylist">
+                            <e:filters>
+                                <e:filter name="theme-filter" source="theme" target="theme" />
+                            </e:filters>
+                        </e:field>
+                    </e:section>
+                </e:form>
+            </e:tab>
+            <e:tab name="hac.openQuestion">
+                <e:form>
+                    <e:section name="hac.openQuestion" position="98" columns="1">
+                        <e:field qualifier="openQuestions" widget="manytomanylist">
+                            <e:filters>
+                                <e:filter name="theme-filter" source="theme" target="theme" />
+                            </e:filters>
+                        </e:field>
+                    </e:section>
+                </e:form>
+            </e:tab>
+        </e:component>
+        <a:actions>
+            <a:action name="activity.results" code="activity.results" type="TestResult" position="actions"
+                      icon="fa-solid fa-lock-open" viewMode="list,view" redirect="true"/>
+        </a:actions>
+    </e:editor-area>
+</context>

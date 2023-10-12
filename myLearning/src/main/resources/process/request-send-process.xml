@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://www.isis.cm/config/process"
+   start="processRequestSend"
+   name="Request Send data processor">
+    <description>Workflow de validation des traitement d'une requete</description>
+    <actions>
+        <action id="processRequestSend" bean="processRequestSend">
+            <transitions>
+                <transition name="OK" to="notifySender"/>
+                <transition name="KO" to="failed" />
+            </transitions>
+        </action>
+         <action id="notifySender"  bean="notifySender">
+             <transitions>
+                 <transition name="OK" to="success"/>
+                 <transition name="KO" to="failed" />
+             </transitions>
+         </action>
+        <end id="failed" state="FAILURE" />
+        <end id="success" state="SUCCEEDED" />
+    </actions>
+</process>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         action="homeworkActivityAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="theme" search="true" />
+            <l:column qualifier="training" search="true" />
+            <l:column qualifier="mark"  />
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="online" />
+            <l:column qualifier="file" />
+            <l:column qualifier="acceptformat" />
+            <l:column qualifier="successAt" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section columns="2" name="hac.commons" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="folder" widget="manytoone" />
+                        <e:field qualifier="acceptformat" />
+                        <e:field qualifier="successAt" />
+                    </e:section>
+                    <e:section name="hac.commons.01" position="99" columns="2">
+                        <e:section name="hac.commons.02" position="100" columns="2">
+                            <e:field qualifier="beginAt" widget="datetime-local" />
+                            <e:field qualifier="endAt" widget="datetime-local" />
+                        </e:section>
+                        <e:section name="hac.comons.03" position="99" columns="2">
+                            <e:field qualifier="online" />
+                            <e:field qualifier="file" />
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.commons.042" position="98" columns="1">
+                        <e:field qualifier="resources" widget="manytomanylist" />
+                    </e:section>
+                    <e:section name="hac.commons.041" position="97" columns="1">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                    <e:section name="hac.commons.05" position="96" columns="1">
+                        <e:field qualifier="instructions" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+        <a:actions>
+            <a:action name="Homework.result.actions" code="Homework.result.actions" type="HomeWorkResult" position="actions" viewMode="list,view"
+                    icon="fa-solid fa-lock-open" redirect="true" />
+        </a:actions>
+    </e:editor-area>
+</context>

@@ -1,0 +1,11 @@
+/.settings/
+/.idea/
+/.project
+/eLearning/node_modules
+/eLearning/src/main/resources/ui/node
+/eLearning/src/main/resources/ui/node_modules
+/eLearning/src/main/resources/ui/target.dist
+/eLearning/src/main/resources/ui/target
+/eLearning/target
+/eLearning/src/main/resources/static
+/myLearning/target

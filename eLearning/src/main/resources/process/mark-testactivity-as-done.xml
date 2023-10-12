@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://www.isis.cm/config/process"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/process /schema/processdefinition.xsd"
+         start="checkActivityType"
+         name="Create activity result">
+    <description></description>
+    <actions>
+        <
+    </actions>
+</process>

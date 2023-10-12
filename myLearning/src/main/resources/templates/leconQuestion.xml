@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         action="leconQuestionAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="id" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true" />
+            <l:column qualifier="showOnMenu" search="true"/>
+            <l:column qualifier="sequence" search="true"/>
+            <l:column qualifier="content" widget="localized" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="id" searchTitle="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" position="100" columns="2">
+                        <e:field qualifier="id" />
+                        <e:field qualifier="name"  widget="localized"/>
+                        <e:field qualifier="showOnMenu" widget="switch" />
+                        <e:field qualifier="nbreOfattemps" />
+                        <e:field qualifier="sequence" />
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="1" position="96">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+            <e:tab name="hac.trueorfalse.questions">
+                <e:form>
+                    <e:section name="hac.trueorfalse.questions" position="100" columns="1">
+                        <e:field qualifier="truefalse" widget="manytomanylist"/>
+                    </e:section>
+                </e:form>
+            </e:tab>
+            <e:tab name="hac.multianswers.questions">
+                <e:form>
+                    <e:section name="hac.multianswers.list" columns="1" position="98" >
+                        <e:field qualifier="multianswers" widget="manytomanylist" />
+                    </e:section>
+                </e:form>
+            </e:tab>
+        </e:component>
+    </e:editor-area>
+</context>

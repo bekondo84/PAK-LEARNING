@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="activity" widget="manytoone" search="true"/>
+            <l:column qualifier="concern" widget="manytoone" search="true"/>
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true" />
+            <l:column qualifier="mark" />
+            <l:column qualifier="percent" />
+            <l:column qualifier="state" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area>
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons.01" position="100" columns="2" header="false">
+                        <e:field qualifier="activity" widget="manytoone" editable="false" updatable="false"/>
+                        <e:field qualifier="concern" widget="manytoone" updatable="false" editable="false"/>
+                        <e:field qualifier="state" widget="manytoone" editable="false" updatable="true" deletable="false"/>
+                    </e:section>
+                    <e:section name="hac.commons.02" position="99" columns="2">
+                        <e:section name="hac.commons.0201" columns="2" position="100">
+                            <e:field qualifier="beginAt" widget="datetime-local" editable="false" updatable="false" deletable="false"/>
+                            <e:field qualifier="endAt" widget="datetime-local"  editable="false" updatable="false" deletable="false"/>
+                        </e:section>
+                        <e:section name="hac.commons.0202" columns="2" position="99">
+                            <e:field qualifier="mark" editable="false" />
+                            <e:field qualifier="percent" editable="false" updatable="false"/>
+                        </e:section>
+                    </e:section>
+                    <e:section name="type.HomeWorkResult.text.name" columns="1" position="98" header="true">
+                        <e:field qualifier="text" widget="editor" editable="false" updatable="false"/>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

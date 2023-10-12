@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items xmlns="http://www.isis.cm/config/items">
+    <colleciontypes>
+        <collectiontype code="ParticipantCollection" type="list" persist="true" generate="true" elementtype="Participant">
+            <description>List of participants</description>
+        </collectiontype>
+        <collectiontype code="FeedbackList" type="list" persist="true" generate="true" elementtype="Feedback" />
+        <collectiontype code="TrueFalseQuestionList" type="list" persist="true" generate="true" elementtype="TrueFalseQuestion" />
+        <collectiontype code="MultianswerQuestionList" type="list" persist="true" generate="true" elementtype="MultiAnswerQuestion" />
+        <collectiontype code="OpenQuestionList" type="list" persist="true" generate="true" elementtype="OpenQuestion" />
+        <collectiontype code="MediaList" type="list" persist="true" generate="true" elementtype="Media" />
+        <collectiontype code="ResourceList" type="list" persist="true" generate="true" elementtype="Resource" />
+        <collectiontype code="ParticipantGroupList" type="list" persist="true" generate="true" elementtype="ParticipantGroup" />
+    </colleciontypes>
+    <enumtypes>
+        <enumtype code="GenderType" persist="false" package="cm.platform.myleaninig.core" dynamic="true">
+            <value code="M"/>
+            <value code="F" />
+        </enumtype>
+        <enumtype code="TSessionStatut" persist="false" package="cm.platform.myleaninig.core" dynamic="true">
+            <value code="P"/>
+            <value code="H" />
+        </enumtype>
+        <enumtype code="ParticipantCategory" persist="true" package="cm.platform.myleaninig.core" dynamic="false">
+            <value code="EMPLOYE"/>
+            <value code="PARTENER" />
+        </enumtype>
+        <enumtype code="InvolveType" persist="true" >
+            <value code="STUDENT"/>
+            <value code="TEACHER" />
+        </enumtype>
+        <enumtype code="InvolveState" persist="true">
+            <value code="REGISTER"/>
+            <value code="INPROGRESS" />
+            <value code="FINISH" />
+        </enumtype>
+        <enumtype code="EvaluationMethod" persist="true" >
+            <value code="MORE_GREATER"/>
+            <value code="AVERAGE" />
+            <value code="FIRST_ATTEMPT" />
+            <value code="LAST_ATTEMPT" />
+        </enumtype>
+        <enumtype code="TrueFalseQuestionEnum" persist="false" dynamic="true">
+            <value code="TRUE"/>
+            <value code="FALSE" />
+        </enumtype>
+        <enumtype code="ActivityResultState" persist="true">
+            <value code="UNKOWN" />
+            <value code="INPROGRESS"/>
+            <value code="FINISH" />
+        </enumtype>
+        <enumtype code="TrueFalseResultState" persist="true">
+            <value code="TRUE"/>
+            <value code="FALSE" />
+        </enumtype>
+        <enumtype code="TestResultState" persist="true">
+            <value code="CREATE"/>
+            <value code="INPROGRESS" />
+            <value code="DONE" />
+        </enumtype>
+        <enumtype code="TrainingState" persist="true">
+            <value code="CREATE"/>
+            <value code="PUBLISH" />
+            <value code="CLOSE" />
+        </enumtype>
+        <enumtype code="InvolveTrainingResult" persist="true">
+            <value code="SUCCESSED"/>
+            <value code="FAILED" />
+        </enumtype>
+        <enumtype code="CourseFormat" persist="true">
+            <value code="PDF"/>
+            <value code="MP4" />
+            <value code="MP3" />
+            <value code="NONE" />
+        </enumtype>
+        <enumtype code="RequestSendState" persist="true">
+            <value code="CREATE"/>
+            <value code="CLOSE" />
+        </enumtype>
+    </enumtypes>
+    <relations>
+        <relation code="Training_Workgroupd_Rel">
+            <deployment typecode="001042" table="t_trworkgroup"/>
+            <source qualifier="training" type="Training" cardinality="many">
+                <modifiers unique="true" />
+            </source>
+            <target qualifier="workgroups" type="WorkGroupActivity" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers ignore="true"/>
+            </target>
+        </relation>
+        <relation code="Training_Involved_Rel">
+            <deployment typecode="001006" table="t_sess_invol"/>
+            <source qualifier="training" type="Training" cardinality="many">
+                <modifiers unique="true" ignore="true"/>
+            </source>
+            <target qualifier="involves" type="Involve" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="MultAnswer_Answer_Rel">
+            <deployment typecode="001018" table="maq_answerq"/>
+            <source qualifier="answers" type="MultiAnswerQuestion" cardinality="one" collectiontype="list">
+                <modifiers/>
+            </source>
+            <target qualifier="question" type="QuestionAnswer" cardinality="many" navigable="false">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="TrueFalseAct_Result_Rel">
+            <deployment table="t_test_result" typecode="001023"/>
+            <source qualifier="activity" type="TestActivity" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="results" type="ActivityResult" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers />
+            </target>
+        </relation>
+        <relation code="Training_Activity_Rel">
+            <deployment typecode="001024" table="t_train_activ"/>
+            <source qualifier="training" type="Training" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="activities" type="AbstractActivity" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers  ignore="true"/>
+            </target>
+        </relation>
+        <relation code="WorkGrp_Involve_Rel">
+            <deployment table="t_wgrp_involve" typecode="001026"/>
+            <source qualifier="workgroup" type="WorkGroupActivity" cardinality="many">
+                <modifiers ignore="true" unique="true"/>
+            </source>
+            <target qualifier="members" type="Involve" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="WorkGroup_TimeSheet_Rel">
+            <deployment table="t_wgrp_tish" typecode="001027"/>
+            <source qualifier="workgroup" type="WorkGroupActivity" cardinality="one" collectiontype="list">
+                <modifiers/>
+            </source>
+            <target qualifier="timesheets" type="TimeSheet" cardinality="many" navigable="false">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="Summary" generate="true" persist="true">
+            <deployment typecode="001031" table="t_summary"/>
+            <source qualifier="lecon" type="LeconActivity" cardinality="many">
+                <modifiers ignore="true"/>
+            </source>
+            <target qualifier="summary" type="SummaryEntry" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="LeconContent_LeconActivity_Rel" generate="true" persist="true">
+            <deployment typecode="001033" table="t_lclactivity"/>
+            <source qualifier="activity" type="LeconActivity" cardinality="many">
+                <modifiers ignore="true"/>
+            </source>
+            <target qualifier="contents"  type="LeconContent" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="Activity_LeconQuestion_Rel">
+            <deployment typecode="001034" table="t_lactques"/>
+            <source qualifier="activity" type="LeconActivity" cardinality="many">
+                <modifiers ignore="true"/>
+            </source>
+            <target qualifier="questions" type="LeconQuestion" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="ActivityResult-Test-Rel">
+            <deployment typecode="001039" table="t_resulttest"/>
+            <source qualifier= "activity" type="TestActivity" cardinality="many">
+                <modifiers />
+            </source>
+            <target qualifier="evaluations" type="TestResult" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers ignore="true"/>
+            </target>
+        </relation>
+        <relation code="Result-Homework-Rel">
+            <deployment typecode="001039" table="t_resulthw"/>
+            <source qualifier= "activity" type="HomeworkActivity" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="evaluations" type="HomeWorkResult" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers ignore="true"/>
+            </target>
+        </relation>
+        <relation code="ActivityResult-Lecon-Rel">
+            <deployment typecode="001039" table="t_resultlecon"/>
+            <source qualifier= "activity" type="LeconActivity" cardinality="many">
+                <modifiers />
+            </source>
+            <target qualifier="evaluations" type="LeconResult" cardinality="one" collectiontype="list" navigable="true">
+                <modifiers  ignore="true"/>
+            </target>
+        </relation>
+        <relation code="QuestionAnsew-TestResult-Rel">
+            <deployment typecode="001049" table="t_absquestans"/>
+            <source qualifier="result" type="TestResult" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="response" cardinality="one" type="AbstractAnswer" navigable="true" collectiontype="list">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="QuestionAnsw-LeconEval-Rel">
+            <deployment typecode="001053" table="t_absqueslecon"/>
+            <source qualifier="leconResult" type="LeconEvaluation" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="response" cardinality="one" type="AbstractAnswer" navigable="true" collectiontype="list">
+                <modifiers/>
+            </target>
+        </relation>
+        <relation code="LeconEvaluation-Rel" generate="true" persist="true">
+            <deployment typecode="001054" table="t_leconevalrel"/>
+            <source qualifier="result" type="LeconResult" cardinality="many">
+                <modifiers/>
+            </source>
+            <target qualifier="evaluations" cardinality="one" type="LeconEvaluation" collectiontype="list" navigable="true">
+                <modifiers/>
+            </target>
+        </relation>
+    </relations>
+    <itemtypes>
+        <itemgroup name="planification">
+            <itemtype code="TimeSheet" package="cm.platform.myleaninig.core" persist="true" generate="true">
+                <deployment typecode="001007" table="s_timesheet"/>
+                <attributes>
+                    <attribute qualifier="day" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="startAt" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="time" />
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="subject" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Involve"  package="cm.platform.myleaninig.core" persist="true" generate="true">
+                <deployment typecode="001005" table="t_involve"/>
+                <attributes>
+                    <attribute qualifier="concern" type="Participant">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" unique="true" />
+                    </attribute>
+                    <attribute qualifier="register" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("false")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="registerDate" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="startingDate" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="finishedDate" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="type" type="InvolveType">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="isPresent" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("TRUE")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Float.valueOf("0.0")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="result" type="InvolveTrainingResult">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="state" type="InvolveState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="resources">
+            <itemtype code="AbstractResource" package="cm.platform.myleaninig.core" persist="true" generate="true" abstract="true">
+                <deployment typecode="001044" table="t_mlabsresource"/>
+                <attributes>
+                    <attribute qualifier="name" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true"/>
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Dossier" package="cm.platform.myleaninig.core" generate="true" persist="true"
+                searchKey="code" extends="AbstractResource">
+                <deployment typecode="001045" table="t_mlfolder"/>
+                <attributes>
+                    <attribute qualifier="parent" type="Dossier">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="folder" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Resource" package="cm.platform.myleaninig.core" persist="true" generate="true"
+              searchKey="code" extends="AbstractResource">
+                <deployment typecode="001043" table="t_elresource"/>
+                <attributes>
+                    <attribute qualifier="folder" type="Dossier">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf(".")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="file" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="downloadUrl" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="activities">
+            <itemtype code="ActivityResult" package="cm.platform.myleaninig.core" persist="true" generate="true">
+                <deployment typecode="001022" table="t_actresult"/>
+                <attributes>
+                    <attribute qualifier="concern" type="Participant">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="courriel" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="state" type="ActivityResultState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="beginAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Float.valueOf("0.0")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="AbstractActivity" generate="true" persist="true" package="cm.platform.myleaninig.core"
+                      searchKey="code" abstract="true">
+                <deployment typecode="001012" table="t_activity"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="feedback" type="Feedback">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="media01" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="beginAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute qualifier="resources" type="ResourceList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="online" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("false")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="markOn" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" initial="true"/>
+                        <defaultvalue>java.lang.Float.valueOf("20")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="percent" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" initial="true" />
+                        <defaultvalue>java.lang.Float.valueOf("100")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="successAt" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers  initial="true"/>
+                        <defaultvalue>java.lang.Float.valueOf("10.00")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="sequence" type="java.lang.Integer">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="TestActivity" package="cm.platform.myleaninig.core" persist="true"
+             generate="true" extends="AbstractActivity">
+                <deployment typecode="001013" table="t_acttest"/>
+                <attributes>
+                    <attribute qualifier="nbreOfattemps" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="evalMethod" type="EvaluationMethod">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="truefalse" type="TrueFalseQuestionList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="multianswers" type="MultianswerQuestionList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="openQuestions" type="OpenQuestionList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf("TEST")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="HomeworkActivity" extends="AbstractActivity" generate="true" persist="true"
+             package="cm.platform.myleaninig.core">
+                <deployment typecode="001020" table="t_hwactivity"/>
+                <attributes>
+                    <attribute qualifier="instructions" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="media02" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="file" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("true")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="acceptformat" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf("HOMEWORK")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="LeconActivity" package="cm.platform.myleaninig.core" persist="true" generate="true"
+              extends="AbstractActivity">
+                <deployment table="t_leconactivity" typecode="001021"/>
+                <attributes>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf("LECON")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="SummaryEntry" package="cm.platform.myleaninig.core" persist="true" generate="true">
+                <deployment typecode="001030" table="t_sumentry"/>
+                <attributes>
+                    <attribute qualifier="sequence" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" />
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="index" type="AbstractContent">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="AbstractContent" package="cm.platform.myleaninig.core" generate="true" persist="true"
+               abstract="false" searchKey="id">
+                <deployment typecode="001029" table="t_abscontent"/>
+                <attributes>
+                    <attribute qualifier="id" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="showOnMenu" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers  initial="true"/>
+                        <defaultvalue>java.lang.Boolean.valueOf("false")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="sequence" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="nature" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="LeconContent" package="cm.platform.myleaninig.core" persist="true" generate="true"
+                 extends="AbstractContent">
+                <deployment table="t_lcontent" typecode="001028"/>
+                <attributes>
+                    <attribute qualifier="resource" type="Resource">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="content" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="nature" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf("COURSE")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="format" type="CourseFormat">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="LeconQuestion" package="cm.platform.myleaninig.core" persist="true" generate="true"
+                 extends="AbstractContent">
+                <deployment typecode="001032" table="t_lquestion"/>
+                <attributes>
+                    <attribute qualifier="truefalse" type="TrueFalseQuestionList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="multianswers" type="MultianswerQuestionList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="nature" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.String.valueOf("TEST")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="nbreOfattemps" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.Short.valueOf("3")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="WorkGroupActivity" persist="true" generate="true" package="cm.platform.myleaninig.core"
+                      searchKey="code">
+                <deployment table="t_workgroup" typecode="001025"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="beginAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="virtual" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("true")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="classroom" type="Classroom">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="size" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="available" type="java.lang.Short">
+                        <persistence type="dynamic" handler="workGroupHandler"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="reserve" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="groupes" type="ParticipantGroupList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="onlineRegister" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("TRUE")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="ActivitiesResult">
+            <itemtype code="AbstractActivityResult" package="cm.platform.myleaninig.core" persist="true"
+               generate="true" abstract="true">
+                <deployment typecode="001037" table="t_activityresult"/>
+                <attributes>
+                    <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="beginAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime"/>
+                    </attribute>
+                    <attribute qualifier="concern" type="Participant">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false"/>
+                    </attribute>
+                    <attribute qualifier="percent" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="state" type="TestResultState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="training" type="Training">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="TestResult" package="cm.platform.myleaninig.core" extends="AbstractActivityResult"
+              generate="true" persist="true">
+                <deployment typecode="001038" table="t_testresult"/>
+                <attributes></attributes>
+            </itemtype>
+            <itemtype code="HomeWorkResult" package="cm.platform.myleaninig.core" extends="AbstractActivityResult"
+             generate="true" persist="true">
+                <deployment typecode="001040" table="t_hwresult"/>
+                <attributes>
+                    <attribute qualifier="text" type="ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="LeconResult" package="cm.platform.myleaninig.core" extends="AbstractActivityResult"
+              generate="true" persist="true">
+                <deployment typecode="001041" table="t_leconresult"/>
+                <attributes>
+                    <attribute qualifier="currentIndex" type="SummaryEntry">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="LeconEvaluation" package="cm.platform.myleaninig.core" persist="true"
+                      generate="true" extends="AbstractActivityResult">
+                <deployment typecode="001052" table="t_leconeval"/>
+                <attributes>
+                    <attribute qualifier="question" type="LeconQuestion">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="AbstractAnswer" package="cm.platform.myleaninig.core" persist="true" generate="true"
+               abstract="true">
+                <deployment typecode="001046" table="t_absquestresult"/>
+                <attributes>
+                    <attribute qualifier="question" type="AbstractQuestion">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" />
+                    </attribute>
+                   <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="isOpen" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("TRUE")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="tries" type="java.lang.Short">
+                        <description>Essais multiples</description>
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.Short.valueOf("0")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="OpenQuestionAnswer" package="cm.platform.myleaninig.core" generate="true" persist="true"
+                extends="AbstractAnswer">
+                <deployment typecode="001051" table="t_openanswer"/>
+                <attributes>
+                    <attribute qualifier="answer" type="ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.String.valueOf("OPEN")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="text" type="java.lang.String">
+                        <persistence type="dynamic" handler="openQuestionAnswerHandler"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="TrueOrFalseAnswer" package="cm.platform.myleaninig.core" persist="true" generate="true"
+               extends="AbstractAnswer">
+                <deployment typecode="001047" table="t_trueorfalseanwser"/>
+                <attributes>
+                    <attribute qualifier="answer" type="TrueFalseResultState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.String.valueOf("TRUEORFALSE")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="MultiAnswer" package="cm.platform.myleaninig.core" persist="true" generate="true"
+              extends="AbstractAnswer">
+                <deployment typecode="001048" table="t_multianswer"/>
+                <attributes>
+                    <attribute qualifier="answer" type="QuestionAnswer">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" />
+                        <defaultvalue>java.lang.String.valueOf("MULTI")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="questions">
+            <itemtype code="AbstractQuestion" package="cm.platform.myleaninig.core" generate="true" persist="true" abstract="false" searchKey="code">
+                <deployment table="t_absquest" typecode="001015"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="theme" type="Theme">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="text" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="ready" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.Float.valueOf("1.0")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="generalFeeback" type="Feedback">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="penality" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                        <description>Penality if more than one essaie</description>
+                    </attribute>
+                    <attribute qualifier="type" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="TrueFalseQuestion" package="cm.platform.myleaninig.core" searchKey="code"
+               persist="true" generate="true" extends="AbstractQuestion">
+                <deployment typecode="001016" table="t_truefalse"/>
+                <attributes>
+                    <attribute qualifier="answer" type="TrueFalseResultState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="feedbackifok" type="Feedback">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="feedbackifko" type="Feedback">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="QuestionAnswer" package="cm.platform.myleaninig.core" persist="true" generate="true"
+             searchKey="code" >
+                <deployment typecode="001017" table="t_questanswer"/>
+                <attributes>
+                    <attribute type="java.lang.String" qualifier="code">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute qualifier="text" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="mark" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="feedback" type="Feedback">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="MultiAnswerQuestion" package="cm.platform.myleaninig.core" persist="true"
+                      generate="true" extends="AbstractQuestion">
+                <deployment table="multianswQuest" typecode="001018"/>
+                <attributes></attributes>
+            </itemtype>
+            <itemtype code="OpenQuestion" package="cm.platform.myleaninig.core" persist="true"
+               generate="true" extends="AbstractQuestion">
+                <deployment table="t_openquest" typecode="001019"/>
+                <attributes></attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="core-data">
+            <itemtype code="Training" package="cm.platform.myleaninig.core" persist="true" generate="true"
+                   searchKey="code">
+                <deployment typecode="001003" table="training"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" search="true" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="theme" type="Theme">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                   <attribute qualifier="enable" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true" search="true" />
+                        <defaultvalue>java.lang.Boolean.valueOf("false")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="id" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="resume" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="description" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="medias" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="beginAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" optional="false" />
+                    </attribute>
+                    <attribute qualifier="endAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" optional="false" />
+                    </attribute>
+                    <attribute qualifier="state" type="TrainingState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="publishAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute qualifier="closeAt" type="java.util.Date">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute qualifier="image" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Feedback" package="cm.platform.myleaninig.core" persist="true"
+                      generate="true">
+                <deployment table="t_feedback" typecode="001014"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute qualifier="limit" type="java.lang.Float">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="content" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Theme" package="cm.platform.myleaninig.core" searchKey="code"
+                      persist="true" generate="true">
+                <deployment typecode="001002" table="theme"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers search="true"/>
+                    </attribute>
+                    <attribute qualifier="resume" type="Localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Classroom" package="cm.platform.myleaninig.core" searchKey="code"
+                      generate="true" persist="true">
+                <deployment typecode="001001" table="classroom"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers search="true"/>
+                    </attribute>
+                    <attribute qualifier="size" type="java.lang.Short">
+                        <persistence type="persistent"/>
+                        <modifiers optional="false" />
+                    </attribute>
+                    <attribute qualifier="adresse" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Country" package="cm.platform.myleaninig.core" searchKey="code"
+                      generate="true" persist="true">
+                <deployment typecode="001010" table="country"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute qualifier="name" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Participant" package="cm.platform.myleaninig.core" searchKey="code"
+                      generate="true" persist="true">
+                <deployment typecode="001000" table="participant"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" search="true" optional="false" />
+                    </attribute>
+                    <attribute qualifier="name" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers search="true" optional="false"/>
+                    </attribute>
+                    <attribute qualifier="surname" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers search="true" />
+                    </attribute>
+                    <attribute qualifier="password" type="java.lang.String">
+                        <persistence type="persistent" />
+                        <modifiers search="true"/>
+                    </attribute>
+                    <attribute qualifier="forcePwdChange" type="java.lang.Boolean">
+                        <persistence type="persistent"/>
+                        <modifiers initial="true"/>
+                        <defaultvalue>java.lang.Boolean.valueOf("false")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="email" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers search="true" optional="false"/>
+                    </attribute>
+                    <attribute qualifier="category" type="ParticipantCategory">
+                        <persistence type="persistent"/>
+                        <modifiers search="true" />
+                    </attribute>
+                    <attribute qualifier="gender" type="GenderType">
+                        <persistence type="persistent"/>
+                        <modifiers search="true"/>
+                    </attribute>
+                    <attribute qualifier="town" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="country" type="Country">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="avatar" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="token" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="defaultLanguage" type="Locale">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="groupes" type="ParticipantGroupList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="ParticipantGroup" package="cm.platform.myleaninig.core" persist="true" generate="true" searchKey="code">
+                <deployment typecode="001050" table="t_partgroup"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true"/>
+                    </attribute>
+                    <attribute qualifier="name" type="Localized:java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="groupe" type="ParticipantGroup">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="cmsComponents">
+            <itemtype code="LoginComponent" package="cm.platform.myleaninig.cms" generate="true" persist="true"
+             extends="AbstractCMSComponent">
+                <deployment typecode="001035" table="t_mylearnlogincms"/>
+                <attributes>
+                    <attribute qualifier="message" type="localized:ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="logo" type="Media">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="medias" type="MediaList">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="HomePageComponent" package="cm.platform.myleaninig.cms" generate="true" persist="true" extends="AbstractCMSComponent">
+                <deployment typecode="001036" table="t_homeelcms"/>
+                <attributes></attributes>
+            </itemtype>
+        </itemgroup>
+        <itemgroup name="communication">
+            <itemtype code="RequestSend" package="cm.platform.myleaninig.core">
+                <deployment table="t_requestsend" typecode="000137"/>
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers unique="true" />
+                    </attribute>
+                    <attribute type="java.util.Date" qualifier="messageDate">
+                        <persistence type="persistent"/>
+                        <modifiers datetype="datetime" />
+                    </attribute>
+                    <attribute type="java.lang.String" qualifier="sender">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="messageContent" type="ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="state" type="RequestSendState">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                    <attribute qualifier="response" type="ISIS_BIG_STRING">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </itemgroup>
+    </itemtypes>
+</items>

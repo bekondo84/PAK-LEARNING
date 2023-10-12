@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:ed="http://www.isis.cm/config/editor-area"
+         xmlns:ac="http://www.isis.cm/config/isis-actions"
+    action="requestSendAction">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="sender" search="true" />
+            <ls:column qualifier="messageDate" widget="datetime-local" search="true"/>
+            <ls:column qualifier="messageContent" search="true" />
+            <ls:column qualifier="state" search="true" widget="manytoone" />
+        </ls:list>
+    </ls:list-view>
+    <ed:editor-area searchKey="code" create="false" delete="false" update="true" createOnField="false">
+        <ed:component>
+            <ed:common>
+                <ed:form>
+                    <ed:section name="commons" position="100" columns="2">
+                        <ed:field qualifier="code" editable="false" updatable="false" />
+                        <ed:field qualifier="sender" editable="false" updatable="false" />
+                        <ed:field qualifier="messageDate" widget="datetime-local" editable="false" updatable="false" />
+                        <ed:field qualifier="state" widget="manytoone" editable="false" updatable="false" />
+                    </ed:section>
+                    <ed:section name="commons" position="99" columns="1">
+                        <ed:field qualifier="messageContent" editable="false" updatable="false" widget="textarea"/>
+                    </ed:section>
+                    <ed:section name="commons" position="98" columns="1">
+                        <ed:field qualifier="response" widget="textarea" />
+                    </ed:section>
+                </ed:form>
+            </ed:common>
+        </ed:component>
+        <ac:actions>
+            <ac:action name="request.send.close" code="request.send.close" position="workflow" dynamic="true"/>
+        </ac:actions>
+    </ed:editor-area>
+</context>

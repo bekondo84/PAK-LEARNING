@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:db="http://www.isis.cm/config/dashboard"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-shutcut"
+         action="trainingAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true" />
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="theme" search="true" widget="manytoone"/>
+            <l:column qualifier="resume" widget="localized" search="false"/>
+            <l:column qualifier="beginAt" search="true" widget="datetime-local"/>
+            <l:column qualifier="endAt" search="true" widget="datetime-local"/>
+            <l:column qualifier="state" search="true" />
+            <l:column qualifier="enable"  show="false"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code" >
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:section name="hac.avatar" columns="1" position="100">
+                            <e:field qualifier="image" widget="media" />
+                        </e:section>
+                        <e:section name="hac.commons01" columns="1" position="100">
+                            <e:shutcuts>
+                                <s:shutcut name="training.participants" code="training.participants" icon="fa-solid fa-people-group" type="Involve" counter="participantCount"/>
+                                <s:shutcut name="training.planinng" code="training.planning" icon="fa-regular fa-calendar-days" type="WorkGroupActivity" counter="workgroupCount"/>
+                                <s:shutcut name="training.testActivities" code="training.testActivities" icon="fa-solid fa-cubes" type="TestActivity" counter="testActivitiesCount"/>
+                                <s:shutcut name="training.homeworks" code="training.homeworks" icon="fa-solid fa-house-laptop" type="HomeWorkActivity" counter="homeActivitiesCount"/>
+                                <s:shutcut name="training.lecons" code="training.lecons" icon="fa-brands fa-discourse" type="LeconActivity" counter="leconsCount"/>
+                            </e:shutcuts>
+                        </e:section>
+                    </e:section>
+                    <e:section name="hmc.commons" position="99" columns="2">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized"/>
+                        <e:field qualifier="theme" widget="manytoone"/>
+                        <e:field qualifier="resume"  widget="localized"/>
+                        <e:field qualifier="beginAt" widget="datetime-local" />
+                        <e:field qualifier="endAt" widget="datetime-local" />
+                        <e:field qualifier="state" widget="manytoone" />
+                    </e:section>
+                    <e:section name="hmc.description" position="98" columns="1" header="true">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+            <e:tab name="hmc.training.involves">
+                <e:form>
+                    <e:section name="hmc.training.involves" columns="1" position="100">
+                        <e:field qualifier="involves" widget="onetomany" />
+                    </e:section>
+                </e:form>
+            </e:tab>
+           <e:tab name="hmc.training.others">
+                <e:form>
+                    <e:section name="hac.training.others" position="99" columns="2">
+                         <e:field qualifier="publishAt" widget="datetime-local" />
+                        <e:field qualifier="closeAt" widget="datetime-local" />
+                    </e:section>
+                </e:form>
+            </e:tab>
+        </e:component>
+        <a:actions>
+             <a:action name="training.publish.action" code="PublishTrainingAction" position="workflow" dynamic="true" />
+             <a:action name="training.close.action" code="CloseTrainingAction" position="workflow" dynamic="true" />
+        </a:actions>
+    </e:editor-area>
+</context>

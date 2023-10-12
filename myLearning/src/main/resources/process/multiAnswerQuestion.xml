@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://www.isis.cm/config/process"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/process /schema/processdefinition.xsd"
+         start="extractAndSaveQuestion"
+         name="multiAnswerQuestion">
+    <description>Import multi part data from excel file</description>
+    <actions>
+        <action id="extractAndSaveQuestion" bean="extractQuestionProcess">
+            <transitions>
+                <transition name="OK" to="extractAndSaveQuestionAnswer"/>
+                <transition name="KO" to="error" />
+            </transitions>
+        </action>
+        <action id="extractAndSaveQuestionAnswer" bean="extractQuestionAnswerProcess">
+            <transitions>
+                <transition name="OK" to="end"/>
+                <transition name="KO" to="error" />
+            </transitions>
+        </action>
+         <end id="end" state="SUCCEEDED" />
+        <end id="error" state="FAILURE" />
+    </actions>
+</process>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true"/>
+             <l:column qualifier="training" search="true" />
+            <l:column qualifier="online" widget="checkbox" />
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section columns="2" name="hac.commons" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="online" widget="switch" />
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="2" position="99">
+                        <e:field qualifier="beginAt" widget="datetime-local" />
+                        <e:field qualifier="endAt" widget="datetime-local" />
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="1" position="98">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

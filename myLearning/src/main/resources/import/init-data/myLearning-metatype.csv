@@ -1,0 +1,98 @@
+INSERT_UPDATE MetaType;code[unique=true];codeType;typeName;parent;generate;persist;abstractClass;description
+;TimeSheet;001007;cm.platform.myleaninig.core.TimeSheetModel;  ;true;true;false;  
+;Involve;001005;cm.platform.myleaninig.core.InvolveModel;  ;true;true;false;  
+;AbstractResource;001044;cm.platform.myleaninig.core.AbstractResourceModel;  ;true;true;true;  
+;Dossier;001045;cm.platform.myleaninig.core.DossierModel;AbstractResource;true;true;false;  
+;Resource;001043;cm.platform.myleaninig.core.ResourceModel;AbstractResource;true;true;false;  
+;ActivityResult;001022;cm.platform.myleaninig.core.ActivityResultModel;  ;true;true;false;  
+;AbstractActivity;001012;cm.platform.myleaninig.core.AbstractActivityModel;  ;true;true;true;  
+;TestActivity;001013;cm.platform.myleaninig.core.TestActivityModel;AbstractActivity;true;true;false;  
+;HomeworkActivity;001020;cm.platform.myleaninig.core.HomeworkActivityModel;AbstractActivity;true;true;false;  
+;LeconActivity;001021;cm.platform.myleaninig.core.LeconActivityModel;AbstractActivity;true;true;false;  
+;SummaryEntry;001030;cm.platform.myleaninig.core.SummaryEntryModel;  ;true;true;false;  
+;AbstractContent;001029;cm.platform.myleaninig.core.AbstractContentModel;  ;true;true;false;  
+;LeconContent;001028;cm.platform.myleaninig.core.LeconContentModel;AbstractContent;true;true;false;  
+;LeconQuestion;001032;cm.platform.myleaninig.core.LeconQuestionModel;AbstractContent;true;true;false;  
+;WorkGroupActivity;001025;cm.platform.myleaninig.core.WorkGroupActivityModel;  ;true;true;false;  
+;AbstractActivityResult;001037;cm.platform.myleaninig.core.AbstractActivityResultModel;  ;true;true;true;  
+;TestResult;001038;cm.platform.myleaninig.core.TestResultModel;AbstractActivityResult;true;true;false;  
+;HomeWorkResult;001040;cm.platform.myleaninig.core.HomeWorkResultModel;AbstractActivityResult;true;true;false;  
+;LeconResult;001041;cm.platform.myleaninig.core.LeconResultModel;AbstractActivityResult;true;true;false;  
+;LeconEvaluation;001052;cm.platform.myleaninig.core.LeconEvaluationModel;AbstractActivityResult;true;true;false;  
+;AbstractAnswer;001046;cm.platform.myleaninig.core.AbstractAnswerModel;  ;true;true;true;  
+;OpenQuestionAnswer;001051;cm.platform.myleaninig.core.OpenQuestionAnswerModel;AbstractAnswer;true;true;false;  
+;TrueOrFalseAnswer;001047;cm.platform.myleaninig.core.TrueOrFalseAnswerModel;AbstractAnswer;true;true;false;  
+;MultiAnswer;001048;cm.platform.myleaninig.core.MultiAnswerModel;AbstractAnswer;true;true;false;  
+;AbstractQuestion;001015;cm.platform.myleaninig.core.AbstractQuestionModel;  ;true;true;false;  
+;TrueFalseQuestion;001016;cm.platform.myleaninig.core.TrueFalseQuestionModel;AbstractQuestion;true;true;false;  
+;QuestionAnswer;001017;cm.platform.myleaninig.core.QuestionAnswerModel;  ;true;true;false;  
+;MultiAnswerQuestion;001018;cm.platform.myleaninig.core.MultiAnswerQuestionModel;AbstractQuestion;true;true;false;  
+;OpenQuestion;001019;cm.platform.myleaninig.core.OpenQuestionModel;AbstractQuestion;true;true;false;  
+;Training;001003;cm.platform.myleaninig.core.TrainingModel;  ;true;true;false;  
+;Feedback;001014;cm.platform.myleaninig.core.FeedbackModel;  ;true;true;false;  
+;Theme;001002;cm.platform.myleaninig.core.ThemeModel;  ;true;true;false;  
+;Classroom;001001;cm.platform.myleaninig.core.ClassroomModel;  ;true;true;false;  
+;Country;001010;cm.platform.myleaninig.core.CountryModel;  ;true;true;false;  
+;Participant;001000;cm.platform.myleaninig.core.ParticipantModel;  ;true;true;false;  
+;ParticipantGroup;001050;cm.platform.myleaninig.core.ParticipantGroupModel;  ;true;true;false;  
+;LoginComponent;001035;cm.platform.myleaninig.cms.LoginComponentModel;AbstractCMSComponent;true;true;false;  
+;HomePageComponent;001036;cm.platform.myleaninig.cms.HomePageComponentModel;AbstractCMSComponent;true;true;false;  
+;RequestSend;000137;cm.platform.myleaninig.core.RequestSendModel;  ;true;true;false;  
+;GenderType;gendertype;cm.platform.basecommerce.core.enums.GenderType;EnumerateValue;true;false;false;  
+;TSessionStatut;tsessionstatut;cm.platform.basecommerce.core.enums.TSessionStatut;EnumerateValue;true;false;false;  
+;ParticipantCategory;participantcategory;cm.platform.basecommerce.core.enums.ParticipantCategory;EnumerateValue;false;true;false;  
+;InvolveType;involvetype;cm.platform.basecommerce.core.enums.InvolveType;EnumerateValue;true;true;false;  
+;InvolveState;involvestate;cm.platform.basecommerce.core.enums.InvolveState;EnumerateValue;true;true;false;  
+;EvaluationMethod;evaluationmethod;cm.platform.basecommerce.core.enums.EvaluationMethod;EnumerateValue;true;true;false;  
+;TrueFalseQuestionEnum;truefalsequestionenum;cm.platform.basecommerce.core.enums.TrueFalseQuestionEnum;EnumerateValue;true;false;false;  
+;ActivityResultState;activityresultstate;cm.platform.basecommerce.core.enums.ActivityResultState;EnumerateValue;true;true;false;  
+;TrueFalseResultState;truefalseresultstate;cm.platform.basecommerce.core.enums.TrueFalseResultState;EnumerateValue;true;true;false;  
+;TestResultState;testresultstate;cm.platform.basecommerce.core.enums.TestResultState;EnumerateValue;true;true;false;  
+;TrainingState;trainingstate;cm.platform.basecommerce.core.enums.TrainingState;EnumerateValue;true;true;false;  
+;InvolveTrainingResult;involvetrainingresult;cm.platform.basecommerce.core.enums.InvolveTrainingResult;EnumerateValue;true;true;false;  
+;CourseFormat;courseformat;cm.platform.basecommerce.core.enums.CourseFormat;EnumerateValue;true;true;false;  
+;RequestSendState;requestsendstate;cm.platform.basecommerce.core.enums.RequestSendState;EnumerateValue;true;true;false;  
+;EnumerateValue;enumeratevalue;cm.platform.basecommerce.core.EnumerateValue;EnumerateValue;true;false;false;Enum base class
+INSERT_UPDATE ParticipantCategory;code
+;EMPLOYE
+;PARTENER
+INSERT_UPDATE CourseFormat;code
+;PDF
+;MP4
+;MP3
+;NONE
+INSERT_UPDATE ActivityResultState;code
+;UNKOWN
+;INPROGRESS
+;FINISH
+INSERT_UPDATE TestResultState;code
+;CREATE
+;INPROGRESS
+;DONE
+INSERT_UPDATE InvolveTrainingResult;code
+;SUCCESSED
+;FAILED
+INSERT_UPDATE RequestSendState;code
+;CREATE
+;CLOSE
+INSERT_UPDATE TrueFalseResultState;code
+;TRUE
+;FALSE
+INSERT_UPDATE EvaluationMethod;code
+;MORE_GREATER
+;AVERAGE
+;FIRST_ATTEMPT
+;LAST_ATTEMPT
+INSERT_UPDATE TrainingState;code
+;CREATE
+;PUBLISH
+;CLOSE
+INSERT_UPDATE InvolveType;code
+;STUDENT
+;TEACHER
+INSERT_UPDATE InvolveState;code
+;REGISTER
+;INPROGRESS
+;FINISH
+
+

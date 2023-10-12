@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item" 
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         action="leconResultAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="concern" search="true" />
+            <l:column qualifier="currentIndex" search="true" />
+            <l:column qualifier="activity" search="true" />
+            <l:column qualifier="beginAt" widget="datetime-local" />
+            <l:column qualifier="endAt" widget="datetime-local" />
+            <l:column qualifier="mark" search="true" />
+            <l:column qualifier="percent"  />
+        </l:list>
+    </l:list-view>
+    <e:editor-area update="false" create="false">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:field qualifier="concern" widget="manytoone" updatable="false" editable="false" />
+                        <e:field qualifier="currentIndex" widget="manytoone" editable="false" updatable="false"/>
+                        <e:field qualifier="activity" widget="manytoone" editable="false" updatable="false"/>
+                    </e:section>
+                    <e:section name="hac.commons02" position="99" columns="2">
+                        <e:section name="TestResult.temporality" columns="2" position="100" header="true">
+                            <e:field qualifier="beginAt" widget="datetime-local" />
+                            <e:field qualifier="endAt" widget="datetime-local" />
+                        </e:section>
+                        <e:section name="TestResult.marks" columns="2" position="99" header="true">
+                            <e:field qualifier="mark"  />
+                            <e:field qualifier="percent" />
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.evaluations" columns="1" position="98" header="false">
+                        <e:field qualifier="evaluations" widget="onetomany" updatable="false" editable="false" deletable="false" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+        <a:actions>
+            <a:action name="activity.results" code="activity.results" type="LeconEvaluation" position="actions"
+                      icon="fa-solid fa-lock-open" viewMode="list,view" redirect="true"/>
+        </a:actions>
+    </e:editor-area>
+</context>

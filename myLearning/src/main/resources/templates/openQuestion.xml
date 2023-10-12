@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         action="openQuestionAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" />
+            <l:column qualifier="theme" search="true" />
+            <l:column qualifier="text" search="true" widget="localized"/>
+            <l:column qualifier="ready"  search="true"/>
+            <l:column qualifier="generalFeedback" search="true" />
+            <l:column qualifier="penality" search="true"/>
+        </l:list>
+        <a:actions>
+            <a:action name="OpenQuestion.upload" code="uploadOpenQuestion" typeOp="import" dynamic="true" position="actions" icon="fa-solid fa-upload" />
+        </a:actions>
+    </l:list-view>
+    <e:editor-area>
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="theme" widget="manytoone" />
+                        <e:field qualifier="ready" widget="switch" />
+                    </e:section>
+                    <e:section name="hac.questions" position="98" columns="1" header="true" >
+                        <e:section name="hac.questions.01" columns="1" position="100">
+                            <e:field qualifier="text" widget="localized-area" />
+                        </e:section>
+                        <e:section name="hac.questions.02" columns="2" position="98">
+                            <e:field qualifier="mark" />
+                            <e:field qualifier="generalFeeback" widget="manytoone"/>
+                            <e:field qualifier="penality" />
+                        </e:section>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

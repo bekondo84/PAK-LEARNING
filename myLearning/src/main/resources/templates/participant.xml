@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:a="http://www.isis.cm/config/isis-actions">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true" />
+            <l:column qualifier="name" search="true"/>
+            <l:column qualifier="surname" search="true"/>
+            <l:column qualifier="email" search="true"/>
+            <l:column qualifier="category" search="true" />
+            <l:column qualifier="gender" search="true" />
+            <l:column qualifier="defaultLanguage" search="true" />
+        </l:list>
+        <a:actions>
+            <a:action code="UploadParticipant" name="participant.import" position="actions" dynamic="true"
+                      icon="fa-solid fa-upload" typeOp="import"/>
+        </a:actions>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:section name="hac.avatar" columns="1" position="100">
+                            <e:field qualifier="avatar" widget="media" />
+                        </e:section>
+                        <e:section name="hac.commons01" columns="1" position="100">
+                            <e:field qualifier="code" />
+                            <e:field qualifier="name" />
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.commons.02" position="99" columns="2">
+                        <e:field qualifier="surname" />
+                        <e:field qualifier="email" />
+                        <e:field qualifier="defaultLanguage" widget="manytoone" />
+                        <e:field qualifier="category" widget="manytoone" />
+                        <e:field qualifier="town" />
+                        <e:field qualifier="country" widget="manytoone" />
+                        <e:field qualifier="forcePwdChange" widget="switch" />
+                        <e:field qualifier="gender" widget="select" />
+                        <e:field qualifier="groupes" widget="manytomany" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

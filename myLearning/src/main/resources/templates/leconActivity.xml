@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         xmlns:s="http://www.isis.cm/config/isis-shutcut"
+         action="leconActivityAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="theme" search="true" />
+            <l:column qualifier="training" search="true" />
+            <l:column qualifier="beginAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="endAt" widget="datetime-local" search="true"/>
+            <l:column qualifier="successAt" search="true" />
+            <l:column qualifier="markOn" />
+            <l:column qualifier="percent" />
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code" searchTitle="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section columns="2" name="hac.commons" position="100">
+                        <e:section name="hac.commons" columns="1" position="100">
+                            <e:field qualifier="code" />
+                            <e:field qualifier="name" widget="localized" />
+                        </e:section>
+                        <e:section name="hac.commons" columns="1" position="99">
+                            <e:shutcuts>
+                                <s:shutcut name="leconActivity.content" code="leconActivity.content" type="LeconContent" icon="fa-solid fa-lock-open" counter="courseCount" viewMode="list,view"/>
+                                <s:shutcut name="leconActivity.questions" code="leconActivity.questions" type="LeconQuestion" icon="fa-solid fa-lock-open" counter="testCount"/>
+                                <s:shutcut name="leconActivity.summary" code="leconActivity.summary" type="SummaryEntry" viewMode="list,view" icon="fa-solid fa-lock-open" counter="summaryCount"/>
+                                <s:shutcut name="leconActivity.results" code="leconActivity.results" type="LeconResult"  icon="fa-solid fa-lock-open" viewMode="list,view" counter="resultCount"/>
+                            </e:shutcuts>
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="2" position="99">
+                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="online" widget="switch" />
+                        <e:field qualifier="beginAt" widget="datetime-local" />
+                        <e:field qualifier="endAt" widget="datetime-local" />
+                    </e:section>
+                    <e:section name="hac.commons.03" columns="2" position="98">
+                        <e:field qualifier="sequence" />
+                        <e:field qualifier="markOn"  />
+                        <e:field qualifier="percent" />
+                        <e:field qualifier="successAt" />
+                    </e:section>
+                    <e:section name="hac.commons.042" position="97" columns="1">
+                        <e:field qualifier="resources" widget="manytomanylist" />
+                    </e:section>
+                    <e:section name="hac.commons.02" columns="1" position="96">
+                        <e:field qualifier="description" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+            <e:tab name="hac.tab.contents" position="100">
+                <e:form>
+                    <e:section name="hac.tab.contents" columns="1" position="100">
+                        <e:field qualifier="contents" widget="onetomany" editable="false" updatable="false" deletable="false"/>
+                    </e:section>
+                </e:form>
+            </e:tab>
+            <e:tab name="hac.tab.questions" position="99">
+                <e:form>
+                    <e:section name="hac.tab.questions" columns="1" position="100">
+                        <e:field qualifier="questions" widget="onetomany" editable="false" deletable="false" updatable="false"/>
+                    </e:section>
+                </e:form>
+            </e:tab>
+            <e:tab name="hac.tab.summary" position="99">
+                <e:form>
+                    <e:section name="hac.tab.summary" columns="1" position="100">
+                        <e:field qualifier="summary" widget="onetomany" editable="false" updatable="false" deletable="false"/>
+                    </e:section>
+                </e:form>
+            </e:tab>
+        </e:component>
+        <a:actions>
+            <a:action name="leconActivity.content" code="leconActivity.content" type="LeconContent"
+                    position="actions" redirect="true" viewMode="list,view" icon="fa-solid fa-lock-open"/>
+            <a:action name="leconActivity.questions" code="leconActivity.questions" type="LeconQuestion"
+                      position="actions" viewMode="list,view" redirect="true" icon="fa-solid fa-lock-open"/>
+            <a:action name="leconActivity.summary" code="leconActivity.summary" type="SummaryEntry" redirect="true"
+                       position="actions" viewMode="list,view" icon="fa-solid fa-lock-open" />
+            <a:action name="leconActivity.results" code="activity.results" type="LeconResult" position="actions"
+                      icon="fa-solid fa-lock-open" viewMode="list,view" redirect="true"/>
+        </a:actions>
+    </e:editor-area>
+</context>

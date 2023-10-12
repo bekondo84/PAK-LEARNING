@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:l="http://www.isis.cm/config/list-view">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true"/>
+            <l:column qualifier="limit" search="true"/>
+            <l:column qualifier="content" search="true" widget="localized"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="limit" />
+                    </e:section>
+                    <e:section name="hac.content" columns="1" position="99">
+                        <e:field qualifier="content" widget="localized-area" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

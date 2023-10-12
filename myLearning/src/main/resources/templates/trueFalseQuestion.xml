@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         action="trueOrFalseAnswerAction">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="code" search="true" />
+            <l:column qualifier="name" widget="localized" search="true"/>
+            <l:column qualifier="theme" widget="manytoone" search="true"/>
+            <l:column qualifier="text" widget="localized" search="true"/>
+            <l:column qualifier="ready" widget="checkbox" search="true"/>
+            <l:column qualifier="generalFeeback" />
+            <l:column qualifier="penality" />
+        </l:list>
+        <a:actions>
+            <a:action name="truefalsequestion.upload" code="uploadTrueOrFalseQuestion" typeOp="import" dynamic="true" position="actions" icon="fa-solid fa-upload" />
+        </a:actions>
+    </l:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:field qualifier="code" />
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="theme" widget="manytoone" />
+                        <e:field qualifier="ready" widget="switch" />
+                    </e:section>
+                    <e:section name="hac.questions" position="98" columns="1" header="true" >
+                        <e:section name="hac.questions.01" columns="1" position="100">
+                            <e:field qualifier="text" widget="localized-area" />
+                        </e:section>
+                        <e:section name="hac.questions.02" columns="2" position="98">
+                            <e:field qualifier="answer" widget="manytoone"/>
+                            <e:field qualifier="mark" />
+                            <e:field qualifier="generalFeeback" widget="manytoone"/>
+                            <e:field qualifier="penality" />
+                        </e:section>
+                        <e:section name="hac.questions.03" columns="2" position="97">
+                            <e:field qualifier="feedbackifok" widget="manytoone" />
+                            <e:field qualifier="feedbackifko" widget="manytoone" />
+                        </e:section>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>
