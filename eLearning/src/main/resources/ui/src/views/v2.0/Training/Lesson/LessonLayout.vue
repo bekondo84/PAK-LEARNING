@@ -1,6 +1,6 @@
 <template>
     <TrainingHeader showLesson/>
-    <div class="w-full h-full px-[120px] py-4">
+    <div class="w-full h-full px-[50px] py-4">
         <div class="w-full h-full flex flex-row gap-2">
             
             <div class="w-[400px] min-h-[700px] px-6 py-4 flex flex-col gap-4 rounded-2xl bg-lightBlue drop-shadow-md shadow">

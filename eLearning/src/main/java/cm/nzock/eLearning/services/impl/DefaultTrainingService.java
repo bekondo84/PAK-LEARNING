@@ -35,11 +35,12 @@ public class DefaultTrainingService implements TrainingService {
     private EnumerationService enumService ;
 
     @Override
-    public List<WorkGroupActivityModel> getOnlineTraining(List<String> groupes) {
+    public List<WorkGroupActivityModel> getOnlineTraining(List<String> groupes, final String username) {
         final Map<String, Object> parameters = new HashMap<>();
         parameters.put("online", Boolean.TRUE);
         parameters.put("groupes", groupes);
         parameters.put("publishState", TrainingState.PUBLISH.getCode());
+        //parameters.put("currentUser", username);
         return flexibleSearchService.doSearch(TrainingService.GET_ONLINE_TRAINING, parameters);
     }
 
@@ -67,7 +68,7 @@ public class DefaultTrainingService implements TrainingService {
     @Override
     public long countOnlineTraining(final String username) {
         final ParticipantModel participant = (ParticipantModel) flexibleSearchService.find(username, "code", ParticipantModel._TYPECODE).orElse(null);
-        final List<WorkGroupActivityModel> items = getOnlineTraining(getParticipantsGroup(participant));
+        final List<WorkGroupActivityModel> items = getOnlineTraining(getParticipantsGroup(participant), username);
         return CollectionUtils.emptyIfNull(items).stream()
                 .map(item -> item.getCode())
                 .collect(Collectors.toSet())
@@ -128,21 +129,21 @@ public class DefaultTrainingService implements TrainingService {
         List involves = flexibleSearchService.doSearch(InvolveModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1);
         final InvolveModel involve = CollectionUtils.isEmpty(involves) ? null : (InvolveModel) involves.get(0);
         if (Objects.isNull(involve)) {
-            LOG.info(String.format(":::::: Involve is Null ::::::"));
+           //OG.info(String.format(":::::: Involve is Null ::::::"));
             return;
         }
         if (Objects.isNull(involve.getTraining()) || Objects.isNull(involve.getConcern())) {
-            LOG.info(String.format("::::: Involve Training or Concern is Null ::::::"));
+          //LOG.info(String.format("::::: Involve Training or Concern is Null ::::::"));
             return;
         }
         container = RestrictionsContainer.newInstance();
         container.addEq("training.pk", involve.getTraining().getPK());
         container.addEq("concern.pk", involve.getConcern().getPK());
         final List activitiesResult = flexibleSearchService.doSearch(AbstractActivityResultModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1);
-       LOG.info(String.format("Fecth ActivitiesResults :::::::: %s", CollectionUtils.emptyIfNull(activitiesResult).size()));
+      //OG.info(String.format("Fecth ActivitiesResults :::::::: %s", CollectionUtils.emptyIfNull(activitiesResult).size()));
         if (checkIfAllActivitiesResultAsNotDone(activitiesResult)
            || checkIfTrainingActivitiesComplete(involve, activitiesResult)){
-            LOG.info(String.format("::::: Some Activities are not yet DONE checkIfAllActivitiesResultAsDone : %s :::::: checkIfTrainingActivitiesComplete : %s", checkIfAllActivitiesResultAsNotDone(activitiesResult), checkIfTrainingActivitiesComplete(involve, activitiesResult)));
+            //G.info(String.format("::::: Some Activities are not yet DONE checkIfAllActivitiesResultAsDone : %s :::::: checkIfTrainingActivitiesComplete : %s", checkIfAllActivitiesResultAsNotDone(activitiesResult), checkIfTrainingActivitiesComplete(involve, activitiesResult)));
             return;
         }
 
@@ -184,11 +185,12 @@ public class DefaultTrainingService implements TrainingService {
         final ParticipantModel participant = (ParticipantModel) flexibleSearchService.find(username, "code", ParticipantModel._TYPECODE).orElse(null);
         final WorkGroupActivityModel worgroup = (WorkGroupActivityModel) flexibleSearchService.find(groupe, "code", WorkGroupActivityModel._TYPECODE).orElse(null);
 
-        if (Objects.nonNull(participant) && Objects.nonNull(worgroup)) {
+        if (Objects.nonNull(participant) && Objects.nonNull(worgroup) && Objects.nonNull(worgroup.getTraining())) {
             //find involve
             RestrictionsContainer container = RestrictionsContainer.newInstance();
             container.addEq("concern.code", participant.getCode());
             container.addEq("workgroup.code", worgroup.getCode());
+            container.addEq("training.code", worgroup.getTraining().getCode());
             List involves = flexibleSearchService.doSearch(InvolveModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1) ;
             InvolveModel involve  = new InvolveModel();
             if (CollectionUtils.isEmpty(involves)) {

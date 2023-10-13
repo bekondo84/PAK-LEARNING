@@ -115,7 +115,7 @@ public class DefaultTrainingFacade implements TrainingFacade {
     @Override
     public Set<WorkgroupActivityData> getOnlineTraining(final String username) {
         final ParticipantModel participant = (ParticipantModel) flexibleSearchService.find(username, "code", ParticipantModel._TYPECODE).orElse(null);
-        return  CollectionUtils.emptyIfNull(trainingService.getOnlineTraining(getParticipantsGroup(participant)))
+        return  CollectionUtils.emptyIfNull(trainingService.getOnlineTraining(getParticipantsGroup(participant), username))
                 .stream().map(wg -> {
                     final WorkgroupActivityData workgroupActivityData =  new WorkgroupActivityData();
                     workgroupActivityPopulator.populate(wg, workgroupActivityData);

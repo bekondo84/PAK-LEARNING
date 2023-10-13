@@ -8,11 +8,15 @@ import cm.platform.myleaninig.core.WorkGroupActivityModel;
 import java.util.List;
 
 public interface TrainingService {
-    public static final String GET_ONLINE_TRAINING = "SELECT  c FROM WorkGroupActivityModel AS c JOIN c.groupes AS g  WHERE c.virtual = :online AND c.training.state.code = :publishState  AND g.code IN :groupes";
+    public static final String GET_ONLINE_TRAINING = "SELECT  c FROM WorkGroupActivityModel AS c " +
+                                                     "JOIN c.groupes AS g " +
+                                                     "WHERE c.virtual = :online " +
+                                                     "AND c.training.state.code = :publishState " +
+                                                     "AND g.code IN :groupes ";
 
     List<InvolveModel> getTrainingToRegisterForUsername(final String username);
     long countTrainingToRegisterForUsername(final String username);
-    List<WorkGroupActivityModel> getOnlineTraining(List<String> groupes);
+    List<WorkGroupActivityModel> getOnlineTraining(List<String> groupes, final String username);
     List<WorkGroupActivityModel> getWorkgroupForTraining(final String trainig);
     void registerForTraining(Long involve, String group) throws ModelServiceException;
     void startTraining(Long involve) throws ModelServiceException;
