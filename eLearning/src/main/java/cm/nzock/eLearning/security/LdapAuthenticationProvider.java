@@ -64,7 +64,7 @@ public class LdapAuthenticationProvider implements AuthenticationProvider {
 
         if (Objects.nonNull(setting) && BooleanUtils.isTrue(setting.getLdapAuthentication()) && activate(authentication)) {
             ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(null, setting.getLdapUrl());
-            Authentication auth = provider.authenticate(new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials()));
+            Authentication auth = provider.authenticate(authentication);
             return auth;
         } else {
             return null;
@@ -80,6 +80,6 @@ public class LdapAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+        return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 }

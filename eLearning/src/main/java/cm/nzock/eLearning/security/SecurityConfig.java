@@ -3,7 +3,12 @@ package cm.nzock.eLearning.security;
 import cm.nzock.eLearning.converters.UserDetailsConverter;
 import cm.nzock.eLearning.dao.ParticipantDao;
 import cm.platform.BaseCommerceConfig;
+import cm.platform.basecommerce.core.enums.ParticipantCategory;
+import cm.platform.basecommerce.core.settings.SettingModel;
+import cm.platform.basecommerce.services.SettingService;
 import cm.platform.myleaninig.core.ParticipantModel;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,16 +24,20 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.Objects;
 
 import static java.lang.String.format;
 
@@ -43,16 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsConverter userDetailsConverter;
     private LdapAuthenticationProvider ldapAuthenticationProvider;
     private LocalAuthenticationProvider localAuthenticationProvider;
+    //private SettingService settingService;
 
     @Autowired
     public SecurityConfig(ParticipantDao userDao, JwtTokenFilter jwtTokenFilter,
                           UserDetailsConverter userDetailsConverter, LdapAuthenticationProvider ldapAuthenticationProvider,
-                          LocalAuthenticationProvider localAuthenticationProvider) {
+                          LocalAuthenticationProvider localAuthenticationProvider/**, SettingService settingService*/) {
         this.userDao = userDao;
         this.jwtTokenFilter = jwtTokenFilter;
         this.userDetailsConverter = userDetailsConverter;
         this.ldapAuthenticationProvider = ldapAuthenticationProvider;
         this.localAuthenticationProvider = localAuthenticationProvider;
+        //this.settingService = settingService;
     }
 
     @Override
@@ -99,11 +111,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.authenticationProvider(ldapAuthenticationProvider);
+        auth.authenticationProvider(ldapAuthenticationProvider);
         //auth.authenticationProvider(authenticationProvider());
         auth.authenticationProvider(localAuthenticationProvider);
     }
 
+   /** @Bean
+    public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
+        final SettingModel setting = settingService.getSettings();
+        ActiveDirectoryLdapAuthenticationProvider activeDirectoryLdapAuthenticationProvider =
+                new ActiveDirectoryLdapAuthenticationProvider( setting.getLdapDomain(), setting.getLdapUrl());
+        // to parse AD failed credentails error message due to account - expiry,lock, credentialis - expiry,lock
+        activeDirectoryLdapAuthenticationProvider.setConvertSubErrorCodesToExceptions(true);
+
+        return activeDirectoryLdapAuthenticationProvider;
+    }
+**/
     @Bean
     public CorsFilter corsFilter(){
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -138,4 +161,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    private boolean  activate(final Authentication authentication) {
+        final String username = authentication.getName();
+        assert StringUtils.isNotBlank(username): "No username provided ....";
+        ParticipantModel user = userDao.findByUsername(username).orElse(null);
+        return Objects.nonNull(user) && Objects.nonNull(user.getCategory()) && user.getCategory().equals(ParticipantCategory.EMPLOYE);
+    }
 }
