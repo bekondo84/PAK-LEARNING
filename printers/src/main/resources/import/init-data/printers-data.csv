@@ -1,0 +1,5 @@
+##TemplatePage section
+INSERT_UPDATE PageTemplate;code[unique=true];name[lang=fr];name[lang=en];path;cmsType(code);module(name)
+                          ;Imprimante;Template formulaire Imprimante;Template for Printers;imprimante.xml;PAGE;printers
+                          ;Participant;Modèle utilisateurs des imprimantes;Class room page template;printUser.xml;PAGE;printers
+                          ;Structure;Modèle de structure;Structure template page;structure.xml;PAGE;printers

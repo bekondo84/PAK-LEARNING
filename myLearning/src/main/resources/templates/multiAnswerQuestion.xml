@@ -8,7 +8,12 @@
         <l:list>
             <l:column qualifier="code" search="true"/>
             <l:column qualifier="name" widget="localized" />
-            <l:column qualifier="theme" search="true" />
+            <l:column qualifier="theme" widget="manytoone" search="true">
+                <l:pattern separator=" - ">
+                    <l:field name="code"/>
+                    <l:field name="name"/>
+                </l:pattern>
+            </l:column>
             <l:column qualifier="training" search="true" />
             <l:column qualifier="text" search="true" widget="localized"/>
             <l:column qualifier="ready" widget="switch" search="true"/>

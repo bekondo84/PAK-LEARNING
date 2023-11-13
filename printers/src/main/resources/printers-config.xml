@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module xmlns="http://www.isis.cm/config/module"
+        xmlns:e="http://www.isis.cm/config/explorer-tree">
+    <e:explorer-tree>
+       <e:navigation-node id="printers.configurations" position="99" icon="fa-regular fa-calendar">
+           <e:navigation-node id="printers.printers" code="Imprimante" icon="fa-regular fa-calendar" position="100" viewMode="list,view" />
+           <e:navigation-node id="printers.users" code="Participant" icon="fa-regular fa-calendar" position="100" viewMode="list,view" />
+           <e:navigation-node id="printers.structures" code="Structure" icon="fa-regular fa-calendar" position="100" viewMode="list,view" />
+           <e:navigation-node id="printerns.sites" code="Site" icon="fa-solid fa-sitemap" position="100" viewMode="list,view" />
+       </e:navigation-node>
+        <e:navigation-node id="printers.tasklogs" position="100" icon="fa-regular fa-calendar">
+            <e:navigation-node id="printers.tasklog" code="TaskLog" icon="fa-regular fa-calendar" position="100" viewMode="list,view" />
+        </e:navigation-node>
+    </e:explorer-tree>
+</module>

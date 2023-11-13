@@ -1,0 +1,16 @@
+INSERT_UPDATE MetaType;code[unique=true];codeType;typeName;parent;generate;persist;abstractClass;description
+;Site;001056;cm.printers.config.SiteModel;  ;true;true;false;  
+;Imprimante;001055;cm.printers.config.ImprimanteModel;  ;true;true;false;  
+;Structure;001057;cm.printers.config.StructureModel;  ;true;true;false;  
+;TaskLog;001058;cm.printers.task.TaskLogModel;  ;true;true;false;  
+;Participant;001000;cm.platform.myleaninig.core.ParticipantModel;  ;true;true;false;  
+;PrintUsage;001060;cm.printers.usages.PrintUsageModel;  ;true;true;false;  
+;CycleEnum;cycleenum;cm.platform.basecommerce.core.enums.CycleEnum;EnumerateValue;true;true;false;  
+;EnumerateValue;enumeratevalue;cm.platform.basecommerce.core.EnumerateValue;EnumerateValue;true;false;false;Enum base class
+INSERT_UPDATE CycleEnum;code
+;JOURNALIER
+;HEBDOMADAIRE
+;MENSUEL
+;ANNUEL
+
+

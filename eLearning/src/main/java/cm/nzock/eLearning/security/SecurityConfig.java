@@ -161,10 +161,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    private boolean  activate(final Authentication authentication) {
-        final String username = authentication.getName();
-        assert StringUtils.isNotBlank(username): "No username provided ....";
-        ParticipantModel user = userDao.findByUsername(username).orElse(null);
-        return Objects.nonNull(user) && Objects.nonNull(user.getCategory()) && user.getCategory().equals(ParticipantCategory.EMPLOYE);
-    }
 }

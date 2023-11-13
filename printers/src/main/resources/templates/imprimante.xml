@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="name" search="true" />
+            <l:column qualifier="model" search="true" />
+            <l:column qualifier="ipAdress" search="true" />
+            <l:column qualifier="localisation" search="true" widget="manytoone"/>
+        </l:list>
+    </l:list-view>
+    <e:editor-area searchKey="name">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" position="100" columns="2">
+                        <e:field qualifier="name" />
+                        <e:field qualifier="model" />
+                        <e:field qualifier="ipAdress" />
+                        <e:field qualifier="localisation" widget="manytoone"/>
+                    </e:section>
+                    <e:section name="hac.security" position="99" columns="2" header="true">
+                        <e:field qualifier="login" />
+                        <e:field qualifier="password" widget="password"/>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

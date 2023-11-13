@@ -50,10 +50,13 @@ public class ExtractQuestionAnswerProcess implements Action {
         }
         try {
             List<List<String>> data = excelService.excelToJava(file.getInputStream(), 1);
-            LOG.info("INSIDE ExtractQuestionAnswerProcess : "+data);
+           // LOG.info("INSIDE ExtractQuestionAnswerProcess : "+data);
             List<String> headers = data.get(0);
 
             for (List<String> row : data.subList(1, data.size())) {
+                if (CollectionUtils.isEmpty(row)) {
+                    continue;
+                }
                 MultiAnswerQuestionModel question = getQuestion(questionsBank, headers, row);
                 if (question == null) continue;
                 QuestionAnswerModel answer = new QuestionAnswerModel();

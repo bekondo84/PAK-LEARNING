@@ -5,8 +5,9 @@
          xmlns:a="http://www.isis.cm/config/isis-actions"
          action="involveAction">
     <l:list-view>
-        <l:list>
+        <l:list create="false" delete="false" viewable="false">
             <l:column qualifier="concern" search="true" />
+            <l:column qualifier="trainingCode" search="true" />
             <l:column qualifier="register" />
             <l:column qualifier="registerDate" widget="datetime-local"/>
             <l:column qualifier="type" search="true"/>

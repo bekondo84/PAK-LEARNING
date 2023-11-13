@@ -10,7 +10,12 @@
         <l:list>
             <l:column qualifier="code" search="true" />
             <l:column qualifier="name" widget="localized" search="true"/>
-            <l:column qualifier="theme" search="true" widget="manytoone"/>
+            <l:column qualifier="theme" search="true" widget="manytoone">
+                <l:pattern separator=" - ">
+                    <l:field name="code"/>
+                    <l:field name="name" />
+                </l:pattern>
+            </l:column>
             <l:column qualifier="resume" widget="localized" search="false"/>
             <l:column qualifier="beginAt" search="true" widget="datetime-local"/>
             <l:column qualifier="endAt" search="true" widget="datetime-local"/>

@@ -9,6 +9,7 @@ import cm.platform.basecommerce.services.exceptions.ModelServiceException;
 import cm.platform.myleaninig.core.FeedbackModel;
 import cm.platform.myleaninig.core.MultiAnswerQuestionModel;
 import cm.platform.myleaninig.core.ThemeModel;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,23 +48,31 @@ public class ExtractQuestionProcess implements Action {
             final Map<String, MultiAnswerQuestionModel> questionsBank = new HashMap<>();
 
             for (List<String> row : data.subList(1, data.size())) {
-                Optional theme = flexibleSearchService.find(row.get(headers.indexOf("theme")), "code", ThemeModel._TYPECODE);
-                if (!theme.isPresent()) {
-                    continue;
+
+                if (isValidRow(headers, row)) {
+                    LOG.info(String.format("---------- ROW : %s -------------------- Headers : %s", row, headers));
+                    Optional theme = flexibleSearchService.find(row.get(headers.indexOf("theme")), "code", ThemeModel._TYPECODE);
+                    if (!theme.isPresent()) {
+                        continue;
+                    }
+                    MultiAnswerQuestionModel question = new MultiAnswerQuestionModel();
+                    Optional optional = flexibleSearchService.find(row.get(headers.indexOf("code")), "code", MultiAnswerQuestionModel._TYPECODE);
+                    if (optional.isPresent()) {
+                        question = (MultiAnswerQuestionModel) optional.get();
+                    }
+                    fillQuestion(headers, row, theme, question);
+                    questionsBank.put(question.getCode(), question);
                 }
-                MultiAnswerQuestionModel question = new MultiAnswerQuestionModel();
-                Optional optional = flexibleSearchService.find(row.get(headers.indexOf("code")), "code", MultiAnswerQuestionModel._TYPECODE);
-                if (optional.isPresent()) {
-                    question = (MultiAnswerQuestionModel) optional.get();
-                }
-                fillQuestion(headers, row, theme, question);
-                questionsBank.put(question.getCode(), question);
             }
             context.put("bank", questionsBank);
             return "OK";
         } catch (IOException  e) {
             throw  new BusinessProcessException(e);
         }
+    }
+
+    private boolean isValidRow(List<String> headers, List<String> row) {
+        return CollectionUtils.isNotEmpty(row) && CollectionUtils.isNotEmpty(headers) && (row.size() == headers.size());
     }
 
     private void fillQuestion(List<String> headers, List<String> row, Optional theme, MultiAnswerQuestionModel question) {

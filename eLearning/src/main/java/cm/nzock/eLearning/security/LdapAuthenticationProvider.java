@@ -58,12 +58,16 @@ public class LdapAuthenticationProvider implements AuthenticationProvider {
 
    }
 
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SettingModel setting = settingService.getSettings();
 
         if (Objects.nonNull(setting) && BooleanUtils.isTrue(setting.getLdapAuthentication()) && activate(authentication)) {
-            ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(null, setting.getLdapUrl());
+            ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider(setting.getLdapDomain(), setting.getLdapUrl());
+            provider.setSearchFilter("(&(objectClass=user)(sAMAccountName={0}))");
+            provider.setConvertSubErrorCodesToExceptions(true);
+            provider.setUseAuthenticationRequestCredentials(true);
             Authentication auth = provider.authenticate(authentication);
             return auth;
         } else {

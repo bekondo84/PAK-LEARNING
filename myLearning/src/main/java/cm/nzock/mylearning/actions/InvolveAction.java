@@ -108,16 +108,16 @@ public class InvolveAction extends AbstractAction {
         for (String header : headers) {
             final String value = record.get(headers.indexOf(header));
             if (header.equalsIgnoreCase("concern")) {
-                involve.setConcern((ParticipantModel) concern.get());
+                concern.ifPresent(c -> involve.setConcern((ParticipantModel) c));
             } else if (header.equalsIgnoreCase("training")) {
-                involve.setTraining((TrainingModel) training.get());
+                training.ifPresent(t -> {
+                    involve.setTraining((TrainingModel) t);
+                    involve.setTrainingCode(((TrainingModel)t).getCode());
+                });
             } else if (header.equalsIgnoreCase("workgroup")) {
                 if (StringUtils.isNotBlank(value)) {
-                    WorkGroupActivityModel workgroup = (WorkGroupActivityModel) flexibleSearchService.find(value, "code", WorkGroupActivityModel._TYPECODE)
-                            .orElse(null);
-                    if (Objects.nonNull(workgroup)) {
-                        involve.setWorkgroup(workgroup);
-                    }
+                    flexibleSearchService.find(value, "code", WorkGroupActivityModel._TYPECODE)
+                            .ifPresent(w -> involve.setWorkgroup((WorkGroupActivityModel) w));
                 }
             } else if (header.equalsIgnoreCase("type")) {
                 involve.setType(enumService.getEnumerationValue(value, InvolveType.class));

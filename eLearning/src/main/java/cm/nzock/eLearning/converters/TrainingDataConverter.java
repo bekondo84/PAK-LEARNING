@@ -41,9 +41,10 @@ public class TrainingDataConverter implements Converter<TrainingModel, TrainingD
         TrainingData target = new TrainingData();
         target.setCode(source.getCode());
         target.setName(source.getName(Locale.getDefault()));
-        StringBuffer buffer = new StringBuffer("/backoffice/api/v1/public/media/");
-        buffer.append(source.getImage().getCode());
-        target.setImage(buffer.toString());
+       // StringBuffer buffer = new StringBuffer("/backoffice/api/v1/public/media/");
+        if (Objects.nonNull(source.getImage())) {
+            target.setImage(source.getImage().getDownloadUrl());
+        }
         target.setResume(source.getResume(Locale.getDefault()));
         target.setStartAt(SDF.format(source.getBeginAt()));
         target.setEndAt(SDF.format(source.getEndAt()));

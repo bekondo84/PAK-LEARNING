@@ -293,6 +293,10 @@
                         <persistence type="persistent"/>
                         <modifiers />
                     </attribute>
+                    <attribute qualifier="trainingCode" type="java.lang.String">
+                        <persistence type="persistent"/>
+                        <modifiers />
+                    </attribute>
                 </attributes>
             </itemtype>
         </itemgroup>

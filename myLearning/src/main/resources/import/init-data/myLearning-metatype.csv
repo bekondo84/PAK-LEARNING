@@ -53,9 +53,24 @@ INSERT_UPDATE MetaType;code[unique=true];codeType;typeName;parent;generate;persi
 ;CourseFormat;courseformat;cm.platform.basecommerce.core.enums.CourseFormat;EnumerateValue;true;true;false;  
 ;RequestSendState;requestsendstate;cm.platform.basecommerce.core.enums.RequestSendState;EnumerateValue;true;true;false;  
 ;EnumerateValue;enumeratevalue;cm.platform.basecommerce.core.EnumerateValue;EnumerateValue;true;false;false;Enum base class
+INSERT_UPDATE RequestSendState;code
+;CREATE
+;CLOSE
+INSERT_UPDATE TestResultState;code
+;CREATE
+;INPROGRESS
+;DONE
+INSERT_UPDATE CourseFormat;code
+;PDF
+;MP4
+;MP3
+;NONE
 INSERT_UPDATE InvolveTrainingResult;code
 ;SUCCESSED
 ;FAILED
+INSERT_UPDATE InvolveType;code
+;STUDENT
+;TEACHER
 INSERT_UPDATE EvaluationMethod;code
 ;MORE_GREATER
 ;AVERAGE
@@ -68,31 +83,16 @@ INSERT_UPDATE TrainingState;code
 ;CREATE
 ;PUBLISH
 ;CLOSE
-INSERT_UPDATE CourseFormat;code
-;PDF
-;MP4
-;MP3
-;NONE
-INSERT_UPDATE ActivityResultState;code
-;UNKOWN
-;INPROGRESS
-;FINISH
 INSERT_UPDATE InvolveState;code
 ;REGISTER
 ;INPROGRESS
 ;FINISH
-INSERT_UPDATE TestResultState;code
-;CREATE
-;INPROGRESS
-;DONE
 INSERT_UPDATE ParticipantCategory;code
 ;EMPLOYE
 ;PARTENER
-INSERT_UPDATE RequestSendState;code
-;CREATE
-;CLOSE
-INSERT_UPDATE InvolveType;code
-;STUDENT
-;TEACHER
+INSERT_UPDATE ActivityResultState;code
+;UNKOWN
+;INPROGRESS
+;FINISH
 
 

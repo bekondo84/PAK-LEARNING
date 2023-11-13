@@ -29,15 +29,19 @@
                         </e:section>
                         <e:section name="hac.commons" columns="1" position="99">
                             <e:shutcuts>
-                                <s:shutcut name="leconActivity.content" code="leconActivity.content" type="LeconContent" icon="fa-solid fa-lock-open" counter="courseCount" viewMode="list,view"/>
-                                <s:shutcut name="leconActivity.questions" code="leconActivity.questions" type="LeconQuestion" icon="fa-solid fa-lock-open" counter="testCount"/>
-                                <s:shutcut name="leconActivity.summary" code="leconActivity.summary" type="SummaryEntry" viewMode="list,view" icon="fa-solid fa-lock-open" counter="summaryCount"/>
-                                <s:shutcut name="leconActivity.results" code="leconActivity.results" type="LeconResult"  icon="fa-solid fa-lock-open" viewMode="list,view" counter="resultCount"/>
+                                <s:shutcut name="leconActivity.content" code="leconActivity.content" type="LeconContent" icon="fa-solid fa-book" counter="courseCount" viewMode="list,view"/>
+                                <s:shutcut name="leconActivity.questions" code="leconActivity.questions" type="LeconQuestion" icon="fa-solid fa-clipboard-question" counter="testCount"/>
+                                <s:shutcut name="leconActivity.summary" code="leconActivity.summary" type="SummaryEntry" viewMode="list,view" icon="fa-solid fa-list" counter="summaryCount"/>
+                                <s:shutcut name="leconActivity.results" code="leconActivity.results" type="LeconResult"  icon="fa-solid fa-recycle" viewMode="list,view" counter="resultCount"/>
                             </e:shutcuts>
                         </e:section>
                     </e:section>
                     <e:section name="hac.commons.02" columns="2" position="99">
-                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="training" widget="manytoone">
+                            <e:filters>
+                                <e:filter source="state.code" value="CREATE" />
+                            </e:filters>
+                        </e:field>
                         <e:field qualifier="online" widget="switch" />
                         <e:field qualifier="beginAt" widget="datetime-local" />
                         <e:field qualifier="endAt" widget="datetime-local" />
@@ -78,6 +82,7 @@
                 </e:form>
             </e:tab>
         </e:component>
+        <!--
         <a:actions>
             <a:action name="leconActivity.content" code="leconActivity.content" type="LeconContent"
                     position="actions" redirect="true" viewMode="list,view" icon="fa-solid fa-lock-open"/>
@@ -88,5 +93,6 @@
             <a:action name="leconActivity.results" code="activity.results" type="LeconResult" position="actions"
                       icon="fa-solid fa-lock-open" viewMode="list,view" redirect="true"/>
         </a:actions>
+        -->
     </e:editor-area>
 </context>

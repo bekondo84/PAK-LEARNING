@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items xmlns="http://www.isis.cm/config/items"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.isis.cm/config/items schema/items.xsd">
+    <colleciontypes></colleciontypes>
+    <enumtypes>
+        <enumtype code="CycleEnum" persist="true">
+            <value code="JOURNALIER"/>
+            <value code="HEBDOMADAIRE"/>
+            <value code="MENSUEL"/>
+            <value code="ANNUEL"/>
+        </enumtype>
+    </enumtypes>
+    <relations></relations>
+    <itemtypes>
+        <itemtype code="Site" package="cm.printers.config" generate="true" persist="true" searchKey="code">
+            <deployment typecode="001056" table="t_site"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true" />
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="Imprimante" persist="true" generate="true" package="cm.printers.config" searchKey="name">
+            <deployment table="t_printer" typecode="001055"/>
+            <attributes>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true" />
+                </attribute>
+                <attribute qualifier="model" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers/>
+                </attribute>
+                <attribute qualifier="ipAdress" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="localisation" type="Site">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="login" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="password" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="Structure" package="cm.printers.config" persist="true" generate="true">
+            <deployment table="t_structure" typecode="001057"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true" />
+                </attribute>
+                <attribute qualifier="intitule" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="TaskLog" package="cm.printers.task" generate="true" persist="true">
+            <deployment typecode="001058" table="t_tasklog"/>
+            <attributes>
+                <attribute qualifier="taskname" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers/>
+                </attribute>
+                <attribute qualifier="description" type="ISIS_BIG_STRING">
+                    <persistence type="persistent"/>
+                    <modifiers/>
+                </attribute>
+                <attribute qualifier="startAt" type="java.util.Date">
+                    <persistence type="persistent"/>
+                    <modifiers datetype="datetime"/>
+                </attribute>
+                <attribute qualifier="endAt"  type="java.util.Date">
+                    <persistence type="persistent"/>
+                    <modifiers datetype="datetime"/>
+                </attribute>
+                <attribute qualifier="errormessage" type="ISIS_BIG_STRING">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="status" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers/>
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="Participant" package="cm.platform.myleaninig.core" generate="true" persist="true" searchKey="code">
+            <deployment typecode="001000" table="participant"/>
+            <attributes>
+               <attribute qualifier="affectation" type="Structure">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="structure" type="Structure">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+            </attributes>
+        </itemtype>
+        <itemtype code="PrintUsage" package="cm.printers.usages" persist="true" generate="true" >
+            <deployment typecode="001060" table="t_print_usage"/>
+            <attributes>
+                <attribute qualifier="jobId" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="printerId" type="java.lang.Long">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="userName" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="fileName" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="printer" type="Imprimante">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="user" type="Participant">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="result" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="startTime" type="java.util.Date">
+                    <persistence type="persistent"/>
+                    <modifiers datetype="datetime"/>
+                </attribute>
+                <attribute qualifier="endTime" type="java.util.Date">
+                    <persistence type="persistent"/>
+                    <modifiers datetype="datetime"/>
+                </attribute>
+                <attribute qualifier="departmentId" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="jobType" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="originalPages" type="java.lang.Integer">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="outputPages" type="java.lang.Integer">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="sheetCopies" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="endCode" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="jobNote" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+                <attribute qualifier="details" type="java.lang.String">
+                    <persistence type="persistent"/>
+                    <modifiers />
+                </attribute>
+            </attributes>
+        </itemtype>
+    </itemtypes>
+</items>

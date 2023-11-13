@@ -27,7 +27,11 @@
                         <e:field qualifier="code" />
                         <e:field qualifier="name" widget="localized" />
                         <e:field qualifier="theme" widget="manytoone" />
-                        <e:field qualifier="training" widget="manytoone" />
+                        <e:field qualifier="training" widget="manytoone">
+                            <e:filters>
+                                <e:filter source="state.code" value="CREATE" />
+                            </e:filters>
+                        </e:field>
                         <e:field qualifier="successAt"  />
                         <e:field qualifier="beginAt" widget="datetime-local" />
                         <e:field qualifier="endAt" widget="datetime-local" />

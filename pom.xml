@@ -20,7 +20,8 @@
     </dependencies>
 
     <modules>
-       <module>myLearning</module>
+        <module>myLearning</module>
         <module>eLearning</module>
-    </modules>
+    <module>printers</module>
+  </modules>
 </project>

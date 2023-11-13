@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.isis.cm/config/project"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.isis.cm/config/project  schema/project.xsd">
+    <name>printers</name>
+    <version>1.0.0</version>
+    <author>BEKONDO KANGUE D</author>
+    <sequence>10</sequence>
+    <summary>
+        <entry local="fr">
+            <value>Extension permettant la gestion des imprimantes canons</value>
+        </entry>
+        <entry local="en">
+            <value>Extension for managing canon printers</value>
+        </entry>
+    </summary>
+    <description>
+        <entry local="fr">
+            <value>Permet la collect des données d'impressions et de calculer la disponibilité des equipements </value>
+        </entry>
+        <entry local="en">
+            <value>Help in managing prints and compute de availability of printers</value>
+        </entry>
+    </description>
+    <category>management</category>
+    <website>https://www.pak.cm</website>
+    <type>application</type>
+    <depends></depends>
+</project>

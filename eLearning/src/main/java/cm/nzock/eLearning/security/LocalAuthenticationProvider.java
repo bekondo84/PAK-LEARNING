@@ -3,7 +3,10 @@ package cm.nzock.eLearning.security;
 import cm.nzock.eLearning.converters.UserDetailsConverter;
 import cm.nzock.eLearning.dao.ParticipantDao;
 import cm.platform.basecommerce.core.enums.ParticipantCategory;
+import cm.platform.basecommerce.core.settings.SettingModel;
+import cm.platform.basecommerce.services.SettingService;
 import cm.platform.myleaninig.core.ParticipantModel;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -28,6 +31,9 @@ public class LocalAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserDetailsConverter userDetailsConverter;
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private SettingService settingService;
+
 
     public LocalAuthenticationProvider() {
         this.passwordEncoder = new BCryptPasswordEncoder();
@@ -50,6 +56,10 @@ public class LocalAuthenticationProvider implements AuthenticationProvider {
     }
 
     private boolean  activate(final Authentication authentication) {
+        final SettingModel setting =  settingService.getSettings();
+        if (Objects.isNull(setting) || BooleanUtils.isFalse(setting.getLdapAuthentication())) {
+            return true;
+        }
         final String username = authentication.getName();
         assert StringUtils.isNotBlank(username): "No username provided ....";
         ParticipantModel user = userDao.findByUsername(username).orElse(null);

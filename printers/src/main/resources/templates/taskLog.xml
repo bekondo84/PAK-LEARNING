@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-item"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:a="http://www.isis.cm/config/isis-actions">
+    <l:list-view>
+        <l:list create="false" viewable="false" delete="true">
+            <l:column qualifier="taskname" search="true" />
+            <l:column qualifier="description" search="true" widget="localized"/>
+            <l:column qualifier="startAt" search="true" widget="datetime-local"/>
+            <l:column qualifier="endAt" search="true" widget="datetime-local"/>
+            <l:column qualifier="errormessage" search="true" />
+            <l:column qualifier="status" search="true" />
+        </l:list>
+    </l:list-view>
+</context>
